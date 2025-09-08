@@ -1,0 +1,36 @@
+Windows Registry Editor Version 5.00
+
+; Windows Lite 11 Registry for HKEY_LOCAL_MACHINE\SOFTWARE
+; Registry v2.8 by Irochi (https://irochi.moe)
+; 이 레지스트리는 마운트된 이미지에서 사용할 수 있습니다. (reg load HKLM\winlite_SOFTWARE MOUNT\Windows\System32\Config\SOFTWARE)
+
+; 예약된 저장소 7GB 비활성화
+[HKEY_LOCAL_MACHINE\winlite_SOFTWARE\Microsoft\Windows\CurrentVersion\ReserveManager]
+"ShippedWithReserves"=dword:00000000
+
+; Outlook 비활성화
+[HKEY_LOCAL_MACHINE\winlite_SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Orchestrator\UScheduler\OutlookUpdate]
+"workCompleted"=dword:00000001
+[-HKEY_LOCAL_MACHINE\winlite_SOFTWARE\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\OutlookUpdate]
+
+; Dev Home 비활성화
+[HKEY_LOCAL_MACHINE\winlite_SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Orchestrator\UScheduler\DevHomeUpdate]
+"workCompleted"=dword:00000001
+[-HKEY_LOCAL_MACHINE\winlite_SOFTWARE\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\DevHomeUpdate]
+
+; OneDrive Sync 비활성화
+[HKEY_LOCAL_MACHINE\winlite_SOFTWARE\Policies\Microsoft\Windows\OneDrive]
+"DisableFileSyncNGSC"=dword:00000001
+
+; 블로트웨어 설치 비활성화
+[HKEY_LOCAL_MACHINE\winlite_SOFTWARE\Policies\Microsoft\Windows\CloudContent]
+"DisableCloudOptimizedContent"=dword:00000001
+
+; 내 PC에서 3D 개체 비활성화
+[-HKEY_LOCAL_MACHINE\winlite_SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}]
+
+; Windows 11 업그레이드 비활성화
+[HKEY_LOCAL_MACHINE\winlite_SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate]
+"TargetReleaseVersion"=dword:00000001
+"ProductVersion"="Windows 10"
+"TargetReleaseVersionInfo"="22H2"

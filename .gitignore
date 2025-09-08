@@ -1,0 +1,61 @@
+.gradle/
+build/
+
+# Eclipse stuff
+.classpath
+.project
+.settings/
+
+# VSCode stuff
+.vscode/
+
+# netbeans
+nbproject/
+nbactions.xml
+
+# vim
+.*.sw[a-p]
+
+# various other potential build files
+bin/
+dist/
+manifest.mf
+
+# Mac filesystem dust
+.DS_Store/
+.DS_Store
+
+# intellij
+*.iml
+*.ipr
+*.iws
+.idea/
+out/
+
+# JetBrains Fleet
+.fleet/
+
+# Linux temp files
+*~
+
+# other stuff
+run/
+logs/
+
+!gradle/wrapper/gradle-wrapper.jar
+
+# WinLite thing
+*.iso
+*.wim
+*.png
+*.zip
+/MOUNT
+/resources/wimlib
+temp_apps.txt
+temp_system_packages.txt
+
+# wim script thing
+start_v6.4.cmd
+readme.pdf
+/Tools
+/ISO
