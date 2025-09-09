@@ -365,7 +365,7 @@ echo     이미지를 최적화하는 중...
 echo.
 echo ──────────────────────────────
 echo.
-"resources\wimlib\wimlib-imagex.exe" optimize install.wim
+"resources\wimlib\wimlib-imagex.exe" optimize install.wim --solid --check
 goto set_custom_edition
 
 :set_custom_edition
