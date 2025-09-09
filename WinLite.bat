@@ -361,12 +361,14 @@ echo.
 echo    Windows Lite Self Edition
 echo.
 echo.
-echo     이미지를 최적화하는 중...
+echo   이미지를 최적화할까요? (Y/N)
 echo.
 echo ──────────────────────────────
 echo.
-"resources\wimlib\wimlib-imagex.exe" optimize install.wim --solid
-goto set_custom_edition
+
+choice /c YN /m "최적화할까요"
+if errorlevel 2 goto set_custom_edition
+if errorlevel 1 "resources\wimlib\wimlib-imagex.exe" optimize install.wim --solid
 
 :set_custom_edition
 cls
