@@ -146,6 +146,19 @@ for %%A in (
     MicrosoftCorporationII.QuickAssist
     MicrosoftTeams
     Microsoft.OutlookForWindows
+    Microsoft.BingSearch
+    Microsoft.Copilot
+    Microsoft.Windows.CrossDevice
+    Microsoft.Getstarted
+    Microsoft.MSPaint
+    Microsoft.OfficePushNotificationUtility
+    Microsoft.Paint
+    Microsoft.StartExperiencesApp
+    Microsoft.Windows.DevHome
+    Microsoft.Windows.Copilot
+    Microsoft.Windows.Teams
+    Microsoft.WindowsTerminal
+    MSTeams
 ) do (
     for /f "tokens=3" %%C in ('findstr /i "%%A_" temp_apps.txt') do (
         echo ªË¡¶ ¡ﬂ: %%C
