@@ -1,0 +1,73 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    env:
+      VERSION: ${{ github.ref_name }}
+
+    steps:
+      - name: Code checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Create ZIP
+        shell: bash
+        run: |
+          set -euo pipefail
+          ZIP_NAME="Windows Lite Self Edition ${VERSION}.zip"
+          zip -r "${ZIP_NAME}" . \
+            -x ".git/*" \
+               ".git" \
+               ".gitignore" \
+               ".gitattributes" \
+               ".editorconfig" \
+               ".github/**" \
+               "${ZIP_NAME}" \
+               "Windows Lite Self Edition *.zip"
+
+      - name: Generate changelog
+        shell: bash
+        run: |
+          set -euo pipefail
+          CURR_TAG="${{ github.ref_name }}"
+          PREV_TAG="$(git describe --tags --abbrev=0 "${{ github.ref }}"^ 2>/dev/null || true)"
+
+          echo "Current tag : ${CURR_TAG}"
+          if [ -n "${PREV_TAG}" ]; then
+            echo "Previous tag: ${PREV_TAG}"
+            RANGE="${PREV_TAG}..${CURR_TAG}"
+          else
+            echo "Previous tag: (none, using initial commit)"
+            FIRST="$(git rev-list --max-parents=0 HEAD | tail -n1)"
+            RANGE="${FIRST}..${CURR_TAG}"
+          fi
+
+          git log --no-merges --pretty=format:"- %s (%h) by %an" ${RANGE} > RELEASE_CHANGELOG
+          if [ ! -s RELEASE_CHANGELOG ]; then
+            echo "No changes" > RELEASE_CHANGELOG
+          fi
+
+      - name: Create GitHub Release and upload asset
+        uses: softprops/action-gh-release@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ env.VERSION }}
+          name: ${{ env.VERSION }}
+          body_path: ./RELEASE_CHANGELOG
+          draft: false
+          prerelease: false
+          files: |
+            Windows Lite Self Edition ${{ env.VERSION }}.zip
