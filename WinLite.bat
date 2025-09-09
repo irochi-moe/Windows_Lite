@@ -1,7 +1,7 @@
 @echo off
 
 rem Windows Lite Self Edition by Irochi (https://irochi.moe)
-rem v1.9
+rem v2.0
 
 cd /d %~dp0
 whoami /groups | findstr /i "S-1-16-12288" >nul
@@ -41,7 +41,7 @@ echo.
 echo.
 echo  by Irochi (https://irochi.moe)
 echo.
-echo               v1.9
+echo               v2.0
 echo.
 echo 式式式式式式式式式式式式式式式式式式式式式式式式式式式式式式
 echo.
