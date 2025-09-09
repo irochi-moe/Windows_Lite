@@ -37,3 +37,7 @@ Windows Registry Editor Version 5.00
 ; Chat Icon 비활성화
 [HKEY_LOCAL_MACHINE\winlite_SOFTWARE\Policies\Microsoft\Windows\Windows Chat]
 "ChatIcon"=dword:00000003
+
+; 개인정보 수집 비활성화
+[HKEY_LOCAL_MACHINE\winlite_SOFTWARE\Policies\Microsoft\Windows\DataCollection]
+"AllowTelemetry"=dword:00000000
