@@ -186,7 +186,6 @@ dism /image:MOUNT /Get-Packages > temp_system_packages.txt
 for %%D in (
     Microsoft-Windows-PowerShell-ISE-FOD-Package
     Microsoft-Windows-InternetExplorer-Optional-Package
-    Microsoft-Windows-LanguageFeatures-Handwriting-ko-kr-Package
     Microsoft-Windows-LanguageFeatures-OCR-ko-kr-Package
     Microsoft-Windows-MediaPlayer-Package
     Microsoft-Windows-QuickAssist-Package
