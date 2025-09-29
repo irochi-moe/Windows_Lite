@@ -82,5 +82,5 @@ Windows Registry Editor Version 5.00
 [HKEY_LOCAL_MACHINE\winlite_USER\Software\Microsoft\Internet Explorer\LowRegistry\Audio\PolicyConfig\PropertyStore]
 
 ; 뉴스 및 관심사 비활성화 (권한 문제로 인해 19045.6396 부터 수정 불가)
-[HKEY_LOCAL_MACHINE\winlite_USER\Software\Microsoft\Windows\CurrentVersion\Feeds]
-"ShellFeedsTaskbarViewMode"=dword:00000002
+; [HKEY_LOCAL_MACHINE\winlite_USER\Software\Microsoft\Windows\CurrentVersion\Feeds]
+; "ShellFeedsTaskbarViewMode"=dword:00000002
