@@ -1,0 +1,47 @@
+name: Bug Report
+description: File a bug report.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: dropdown
+    id: windows_version
+    attributes:
+      label: Which version of Windows Lite are you having trouble with?
+      multiple: true
+      options:
+        - 10
+        - 11 23H2
+        - 11 25H2
+        - Self Edition
+
+  - type: textarea
+    id: bug_description
+    attributes:
+      label: Describe the bug
+      description: What happened? Please describe the issue briefly.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected_behavior
+    attributes:
+      label: Expected behavior
+      description: What did you expect to happen instead?
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce_steps
+    attributes:
+      label: Steps to reproduce
+      description: List the steps to reproduce the issue
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional_context
+    attributes:
+      label: Additional context
+      description: Add any other details or screenshots that might help us understand the problem.
+    validations:
+      required: false
