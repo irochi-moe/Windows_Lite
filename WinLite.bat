@@ -279,36 +279,6 @@ echo     OneDrive를 삭제하는 중...
 echo.
 echo ──────────────────────────────
 echo.
-for /f "delims=" %%i in ('dir /ad /b "MOUNT\Windows\WinSxS\*microsoft-windows-onedrive-setup*" 2^>nul') do (
-    takeown /F "MOUNT\Windows\WinSxS\%%i" /R /D Y
-    icacls "MOUNT\Windows\WinSxS\%%i" /grant Administrators:F /T
-    rmdir /s /q "MOUNT\Windows\WinSxS\%%i"
-)
-for /f "delims=" %%i in ('dir /b "MOUNT\Windows\WinSxS\Manifests\*microsoft-windows-onedrive-setup*.manifest" 2^>nul') do (
-    takeown /F "MOUNT\Windows\WinSxS\Manifests\%%i"
-    icacls "MOUNT\Windows\WinSxS\Manifests\%%i" /grant Administrators:F
-    del /f /q "MOUNT\Windows\WinSxS\Manifests\%%i"
-)
-for /f "delims=" %%i in ('dir /b "MOUNT\Windows\WinSxS\SettingsManifests\*microsoft-windows-onedrive-setup*.manifest" 2^>nul') do (
-    takeown /F "MOUNT\Windows\WinSxS\SettingsManifests\%%i"
-    icacls "MOUNT\Windows\WinSxS\SettingsManifests\%%i" /grant Administrators:F
-    del /f /q "MOUNT\Windows\WinSxS\SettingsManifests\%%i"
-)
-for /f "delims=" %%i in ('dir /b "MOUNT\Windows\servicing\Packages\Microsoft-Windows-OneDrive-Setup*.cat" 2^>nul') do (
-    takeown /F "MOUNT\Windows\servicing\Packages\%%i"
-    icacls "MOUNT\Windows\servicing\Packages\%%i" /grant Administrators:F
-    del /f /q "MOUNT\Windows\servicing\Packages\%%i"
-)
-for /f "delims=" %%i in ('dir /b "MOUNT\Windows\servicing\Packages\Microsoft-Windows-OneDrive-Setup*.mum" 2^>nul') do (
-    takeown /F "MOUNT\Windows\servicing\Packages\%%i"
-    icacls "MOUNT\Windows\servicing\Packages\%%i" /grant Administrators:F
-    del /f /q "MOUNT\Windows\servicing\Packages\%%i"
-)
-for /f "delims=" %%i in ('dir /b "MOUNT\Windows\System32\CatRoot\{F750E6C3-38EE-11D1-85E5-00C04FC295EE}\Microsoft-Windows-OneDrive-Setup*.cat" 2^>nul') do (
-    takeown /F "MOUNT\Windows\System32\CatRoot\{F750E6C3-38EE-11D1-85E5-00C04FC295EE}\%%i"
-    icacls "MOUNT\Windows\System32\CatRoot\{F750E6C3-38EE-11D1-85E5-00C04FC295EE}\%%i" /grant Administrators:F
-    del /f /q "MOUNT\Windows\System32\CatRoot\{F750E6C3-38EE-11D1-85E5-00C04FC295EE}\%%i"
-)
 if exist "MOUNT\Windows\System32\OneDriveSetup.exe" (
     takeown /F "MOUNT\Windows\System32\OneDriveSetup.exe"
     icacls "MOUNT\Windows\System32\OneDriveSetup.exe" /grant Administrators:F
