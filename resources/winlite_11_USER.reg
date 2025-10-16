@@ -1,7 +1,7 @@
 Windows Registry Editor Version 5.00
 
 ; Windows Lite 11 Registry for HKEY_CURRENT_USER
-; Registry v3.6 by Irochi (https://irochi.moe)
+; Registry v3.5 by Irochi (https://irochi.moe)
 ; 이 레지스트리는 마운트된 이미지에서 사용할 수 있습니다. (reg load HKLM\winlite_USER MOUNT\Users\Default\NTUSER.DAT)
 
 ; OneDrive 삭제
@@ -105,7 +105,3 @@ Windows Registry Editor Version 5.00
 
 ; 프로그램별 볼륨 설정 저장 (https://sihloh4me.tistory.com/545)
 [HKEY_LOCAL_MACHINE\winlite_USER\Software\Microsoft\Internet Explorer\LowRegistry\Audio\PolicyConfig\PropertyStore]
-
-; 우클릭 새 메뉴 디자인 비활성화
-[HKEY_LOCAL_MACHINE\winlite_USER\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32]
-@=""
