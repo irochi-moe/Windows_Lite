@@ -12,7 +12,6 @@ if "%errorlevel%" NEQ "0" (
 )
 
 for %%f in (
-    install.wim
     resources\start.bin
     resources\winlite_11_SOFTWARE.reg
     resources\winlite_11_USER.reg
@@ -22,6 +21,12 @@ for %%f in (
         set "ErrorStr2=파일을 정상적으로 다운로드했는지 확인해주세요."
         goto error
     )
+)
+
+if not exist "install.wim" (
+    set "ErrorStr1=install.wim을(를) 찾을 수 없습니다."
+    set "ErrorStr2=순정 윈도우 이미지에서 파일을 가져와주세요."
+    goto error
 )
 
 for /f "tokens=4 delims=. " %%a in ('dism /Get-WimInfo /WimFile:install.wim /index:1 ^| findstr "버전" ^| find /N /V "" ^| find "[2]"') do set "windows_build=%%a"
