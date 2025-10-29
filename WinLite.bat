@@ -29,6 +29,29 @@ for /f "tokens=4 delims=. " %%a in ('dism /Get-WimInfo /WimFile:install.wim /ind
 :check_installation
 if not exist "resources\wimlib\wimlib-imagex.exe" goto download_wimlib
 
+:check_build_version
+if not "%windows_build%"=="26200" (
+    title Windows Lite Self Edition by Irochi - Build Warning
+    cls
+    echo.
+    echo.
+    echo ──────────────────────────────
+    echo.
+    echo    Windows Lite Self Edition
+    echo.
+    echo   install.wim 빌드: %windows_build%
+    echo   스크립트 지원 빌드: 26200
+    echo.
+    echo   이 빌드는 더 이상 지원되지 않습니다.
+    echo  예상치 못한 문제가 발생할 수 있습니다.
+    echo.
+    echo ──────────────────────────────
+    echo.
+    choice /c YN /m "계속 진행하시겠습니까"
+    if errorlevel 2 exit
+    color 07
+)
+
 :main
 title Windows Lite Self Edition by Irochi (https://irochi.moe)
 cls
