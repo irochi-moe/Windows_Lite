@@ -1,8 +1,6 @@
 Windows Registry Editor Version 5.00
 
-; Windows Lite 11 Registry for HKEY_LOCAL_MACHINE\SOFTWARE
-; Registry v3.5 by Irochi (https://irochi.moe)
-; 이 레지스트리는 마운트된 이미지에서 사용할 수 있습니다. (reg load HKLM\winlite_SOFTWARE MOUNT\Windows\System32\Config\SOFTWARE)
+; Windows Lite 11 Registry by Irochi (https://irochi.moe) for HKEY_LOCAL_MACHINE\SOFTWARE
 
 ; 예약된 저장소 7GB 비활성화
 [HKEY_LOCAL_MACHINE\winlite_SOFTWARE\Microsoft\Windows\CurrentVersion\ReserveManager]
@@ -60,3 +58,7 @@ Windows Registry Editor Version 5.00
 ; 무의미한 잠금화면 비활성화
 [HKEY_LOCAL_MACHINE\winlite_SOFTWARE\Policies\Microsoft\Windows\Personalization]
 "NoLockScreen"=dword:00000001
+
+; Alt+Tab 화면 깜빡임 해결
+[HKEY_LOCAL_MACHINE\winlite_SOFTWARE\Microsoft\Windows\Dwm]
+"OverlayMinFPS"=dword:00000000
