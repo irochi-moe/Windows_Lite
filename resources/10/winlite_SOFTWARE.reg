@@ -1,17 +1,17 @@
 Windows Registry Editor Version 5.00
 
-; Windows Lite Registry by Irochi (https://irochi.moe) for HKEY_LOCAL_MACHINE\SOFTWARE
+; Windows Lite 10 Registry by Irochi (https://irochi.moe) for HKEY_LOCAL_MACHINE\SOFTWARE
 
 ; 예약된 저장소 7GB 비활성화
 [HKEY_LOCAL_MACHINE\winlite_SOFTWARE\Microsoft\Windows\CurrentVersion\ReserveManager]
 "ShippedWithReserves"=dword:00000000
 
-; Outlook 비활성화
+; New Outlook 설치 비활성화
 [HKEY_LOCAL_MACHINE\winlite_SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Orchestrator\UScheduler\OutlookUpdate]
 "workCompleted"=dword:00000001
 [-HKEY_LOCAL_MACHINE\winlite_SOFTWARE\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\OutlookUpdate]
 
-; Dev Home 비활성화
+; Dev Home 설치 비활성화
 [HKEY_LOCAL_MACHINE\winlite_SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Orchestrator\UScheduler\DevHomeUpdate]
 "workCompleted"=dword:00000001
 [-HKEY_LOCAL_MACHINE\winlite_SOFTWARE\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\DevHomeUpdate]

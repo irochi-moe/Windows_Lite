@@ -1,6 +1,6 @@
 Windows Registry Editor Version 5.00
 
-; Windows Lite Registry by Irochi (https://irochi.moe) for HKEY_CURRENT_USER
+; Windows Lite 10 Registry by Irochi (https://irochi.moe) for HKEY_CURRENT_USER
 
 ; OneDrive 삭제
 [-HKEY_LOCAL_MACHINE\winlite_USER\Software\Microsoft\Windows\CurrentVersion\Run]
@@ -14,11 +14,11 @@ Windows Registry Editor Version 5.00
 [HKEY_LOCAL_MACHINE\winlite_USER\Software\Policies\Microsoft\Windows\WindowsCopilot]
 "TurnOffWindowsCopilot"=dword:00000001
 
-; 작업 보기 버튼 비활성화
+; 작업 표시줄에서 작업 보기 버튼 비활성화
 [HKEY_LOCAL_MACHINE\winlite_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
 "ShowTaskViewButton"=dword:00000000
 
-; Win+X 메뉴에서 PowerShell 대신 명령 프롬프트 사용 
+; Win+X 메뉴에서 PowerShell 대신 명령 프롬프트 사용
 [HKEY_LOCAL_MACHINE\winlite_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
 "DontUsePowerShellOnWinX"=dword:00000001
 
