@@ -4,31 +4,31 @@ rem Windows Lite Self Edition by Irochi (https://irochi.moe)
 rem v2.7
 
 cd /d "%~dp0" || (
-    set "ErrorStr1=WinLite.batÀ»(¸¦) Ã£À» ¼ö ¾ø½À´Ï´Ù."
-    set "ErrorStr2=ÆÄÀÏÀ» Á¤»óÀûÀ¸·Î ´Ù¿î·ÎµåÇß´ÂÁö È®ÀÎÇØÁÖ¼¼¿ä."
+    set "ErrorStr1=WinLite.batì„(ë¥¼) ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤."
+    set "ErrorStr2=íŒŒì¼ì„ ì •ìƒì ìœ¼ë¡œ ë‹¤ìš´ë¡œë“œí–ˆëŠ”ì§€ í™•ì¸í•´ì£¼ì„¸ìš”."
     goto error
 )
 whoami /groups | findstr /i "S-1-16-12288" >nul
 if %errorlevel% neq 0 (
-    set "ErrorStr1=°ü¸®ÀÚ ±ÇÇÑÀÌ ÇÊ¿äÇÕ´Ï´Ù."
-    set "ErrorStr2=WinLite.bat ÆÄÀÏÀ» ¿ìÅ¬¸¯ÇØ °ü¸®ÀÚ ±ÇÇÑÀ¸·Î ½ÇÇàÇØÁÖ¼¼¿ä."
+    set "ErrorStr1=ê´€ë¦¬ìž ê¶Œí•œì´ í•„ìš”í•©ë‹ˆë‹¤."
+    set "ErrorStr2=WinLite.bat íŒŒì¼ì„ ìš°í´ë¦­í•´ ê´€ë¦¬ìž ê¶Œí•œìœ¼ë¡œ ì‹¤í–‰í•´ì£¼ì„¸ìš”."
     goto error
 )
 
 if not exist "install.wim" (
-    set "ErrorStr1=install.wimÀ»(¸¦) Ã£À» ¼ö ¾ø½À´Ï´Ù."
-    set "ErrorStr2=¼øÁ¤ À©µµ¿ì ÀÌ¹ÌÁö¿¡¼­ ÆÄÀÏÀ» °¡Á®¿ÍÁÖ¼¼¿ä."
+    set "ErrorStr1=install.wimì„(ë¥¼) ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤."
+    set "ErrorStr2=ìˆœì • ìœˆë„ìš° ì´ë¯¸ì§€ì—ì„œ íŒŒì¼ì„ ê°€ì ¸ì™€ì£¼ì„¸ìš”."
     goto error
 )
 
 set "supported_build=26300"
 set "win10_build=19045"
 set "windows_build="
-for /f "tokens=4 delims=. " %%a in ('dism /Get-WimInfo /WimFile:install.wim /index:1 ^| findstr "¹öÀü" ^| find /N /V "" ^| find "[2]"') do set "windows_build=%%a"
+for /f "tokens=4 delims=. " %%a in ('dism /Get-WimInfo /WimFile:install.wim /index:1 ^| findstr "ë²„ì „" ^| find /N /V "" ^| find "[2]"') do set "windows_build=%%a"
 
 if "%windows_build%"=="" (
-    set "ErrorStr1=install.wim ¹öÀüÀ»(¸¦) Ã£À» ¼ö ¾ø½À´Ï´Ù."
-    set "ErrorStr2=¼øÁ¤ À©µµ¿ì ÀÌ¹ÌÁö¿¡¼­ ÆÄÀÏÀ» °¡Á®¿ÍÁÖ¼¼¿ä."
+    set "ErrorStr1=install.wim ë²„ì „ì„(ë¥¼) ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤."
+    set "ErrorStr2=ìˆœì • ìœˆë„ìš° ì´ë¯¸ì§€ì—ì„œ íŒŒì¼ì„ ê°€ì ¸ì™€ì£¼ì„¸ìš”."
     goto error
 )
 
@@ -39,8 +39,8 @@ if "%windows_build%"=="%win10_build%" (
 )
 for %%f in (%RequiredResources%) do (
     if not exist "%%f" (
-        set "ErrorStr1=%%fÀ»(¸¦) Ã£À» ¼ö ¾ø½À´Ï´Ù."
-        set "ErrorStr2=ÆÄÀÏÀ» Á¤»óÀûÀ¸·Î ´Ù¿î·ÎµåÇß´ÂÁö È®ÀÎÇØÁÖ¼¼¿ä."
+        set "ErrorStr1=%%fì„(ë¥¼) ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤."
+        set "ErrorStr2=íŒŒì¼ì„ ì •ìƒì ìœ¼ë¡œ ë‹¤ìš´ë¡œë“œí–ˆëŠ”ì§€ í™•ì¸í•´ì£¼ì„¸ìš”."
         goto error
     )
 )
@@ -54,19 +54,19 @@ if not "%windows_build%"=="%supported_build%" (
     cls
     echo.
     echo.
-    echo ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡
+    echo â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     echo.
     echo    Windows Lite Self Edition
     echo.
-    echo   install.wim ºôµå: %windows_build%
-    echo   ½ºÅ©¸³Æ® Áö¿ø ºôµå: %supported_build%
+    echo   install.wim ë¹Œë“œ: %windows_build%
+    echo   ìŠ¤í¬ë¦½íŠ¸ ì§€ì› ë¹Œë“œ: %supported_build%
     echo.
-    echo   ÀÌ ºôµå´Â ´õ ÀÌ»ó Áö¿øµÇÁö ¾Ê½À´Ï´Ù.
-    echo  ¿¹»óÄ¡ ¸øÇÑ ¹®Á¦°¡ ¹ß»ýÇÒ ¼ö ÀÖ½À´Ï´Ù.
+    echo   ì´ ë¹Œë“œëŠ” ë” ì´ìƒ ì§€ì›ë˜ì§€ ì•ŠìŠµë‹ˆë‹¤.
+    echo  ì˜ˆìƒì¹˜ ëª»í•œ ë¬¸ì œê°€ ë°œìƒí•  ìˆ˜ ìžˆìŠµë‹ˆë‹¤.
     echo.
-    echo ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡
+    echo â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     echo.
-    choice /c YN /m "°è¼Ó ÁøÇàÇÏ½Ã°Ú½À´Ï±î"
+    choice /c YN /m "ê³„ì† ì§„í–‰í•˜ì‹œê² ìŠµë‹ˆê¹Œ"
     if errorlevel 2 exit
     color 07
 )
@@ -76,7 +76,7 @@ title Windows Lite Self Edition by Irochi (https://irochi.moe)
 cls
 echo.
 echo.
-echo ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡
+echo â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 echo.
 echo    Windows Lite Self Edition
 echo.
@@ -85,13 +85,13 @@ echo  by Irochi (https://irochi.moe)
 echo.
 echo               v2.7
 echo.
-echo ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡
+echo â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 echo.
 pause
 cls
 dism /Get-WimInfo /wimfile:install.wim
 set "index="
-set /p index=ÀÛ¾÷ÇÒ ¿¡µð¼ÇÀÇ ÀÎµ¦½º ¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä :
+set /p index=ìž‘ì—…í•  ì—ë””ì…˜ì˜ ì¸ë±ìŠ¤ ë²ˆí˜¸ë¥¼ ìž…ë ¥í•´ì£¼ì„¸ìš” :
 call :validate_index
 if "%index_ok%" equ "1" (
     goto mount
@@ -104,17 +104,17 @@ title Windows Lite Self Edition by Irochi - Starting...
 cls
 echo.
 echo.
-echo ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡
+echo â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 echo.
 echo    Windows Lite Self Edition
 echo.
 echo.
-echo     ÀÌ¹ÌÁö¸¦ ¸¶¿îÆ®ÇÏ´Â Áß...
+echo     ì´ë¯¸ì§€ë¥¼ ë§ˆìš´íŠ¸í•˜ëŠ” ì¤‘...
 echo.
-echo ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡
+echo â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 echo.
 if exist "MOUNT" (
-    echo ÀÌÀü ¸¶¿îÆ® Á¤¸® Áß...
+    echo ì´ì „ ë§ˆìš´íŠ¸ ì •ë¦¬ ì¤‘...
     dism /unmount-wim /mountdir:MOUNT /discard
     timeout /t 2 >nul
     rmdir /s /q MOUNT >nul 2>&1
@@ -122,8 +122,8 @@ if exist "MOUNT" (
 mkdir MOUNT
 dism /mount-wim /wimfile:install.wim /index:%index% /mountdir:MOUNT
 if %errorlevel% neq 0 (
-    set "ErrorStr1=ÀÌ¹ÌÁö ¸¶¿îÆ®¿¡ ½ÇÆÐÇß½À´Ï´Ù."
-    set "ErrorStr2=install.wim ÆÄÀÏÀÌ ¼Õ»óµÇ¾ú°Å³ª ÀÎµ¦½º°¡ Àß¸øµÇ¾ú½À´Ï´Ù."
+    set "ErrorStr1=ì´ë¯¸ì§€ ë§ˆìš´íŠ¸ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤."
+    set "ErrorStr2=install.wim íŒŒì¼ì´ ì†ìƒë˜ì—ˆê±°ë‚˜ ì¸ë±ìŠ¤ê°€ ìž˜ëª»ë˜ì—ˆìŠµë‹ˆë‹¤."
     goto error
 )
 goto remove_apps
@@ -133,14 +133,14 @@ title Windows Lite Self Edition by Irochi - Removing apps...
 cls
 echo.
 echo.
-echo ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡
+echo â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 echo.
 echo    Windows Lite Self Edition
 echo.
 echo.
-echo      ¾ÛÀ» »èÁ¦ÇÏ´Â Áß...
+echo      ì•±ì„ ì‚­ì œí•˜ëŠ” ì¤‘...
 echo.
-echo ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡
+echo â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 echo.
 dism /image:MOUNT /Get-ProvisionedAppxPackages > temp_apps.txt
 for %%A in (
@@ -204,7 +204,7 @@ for %%A in (
     MSTeams
 ) do (
     for /f "tokens=3" %%C in ('findstr /i "%%A_" temp_apps.txt') do (
-        echo »èÁ¦ Áß: %%C
+        echo ì‚­ì œ ì¤‘: %%C
         dism /image:MOUNT /Remove-ProvisionedAppxPackage /PackageName:%%C >nul 2>&1
     )
 )
@@ -216,14 +216,14 @@ title Windows Lite Self Edition by Irochi - Removing System Packages...
 cls
 echo.
 echo.
-echo ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡
+echo â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 echo.
 echo    Windows Lite Self Edition
 echo.
 echo.
-echo   ½Ã½ºÅÛ ÆÐÅ°Áö¸¦ »èÁ¦ÇÏ´Â Áß...
+echo   ì‹œìŠ¤í…œ íŒ¨í‚¤ì§€ë¥¼ ì‚­ì œí•˜ëŠ” ì¤‘...
 echo.
-echo ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡
+echo â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 echo.
 dism /image:MOUNT /Get-Packages > temp_system_packages.txt
 for %%D in (
@@ -237,7 +237,7 @@ for %%D in (
     Microsoft-Windows-TabletPCMath-Package
 ) do (
     for /f "tokens=3 delims=: " %%F in ('findstr /i "%%D" temp_system_packages.txt') do (
-        echo »èÁ¦ Áß: %%F
+        echo ì‚­ì œ ì¤‘: %%F
         dism /image:MOUNT /Remove-Package /PackageName:%%F >nul 2>&1
     )
 )
@@ -255,14 +255,14 @@ title Windows Lite Self Edition by Irochi - Modifying registry...
 cls
 echo.
 echo.
-echo ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡
+echo â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 echo.
 echo    Windows Lite Self Edition
 echo.
 echo.
-echo     ·¹Áö½ºÆ®¸®¸¦ ¼öÁ¤ÇÏ´Â Áß...
+echo     ë ˆì§€ìŠ¤íŠ¸ë¦¬ë¥¼ ìˆ˜ì •í•˜ëŠ” ì¤‘...
 echo.
-echo ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡
+echo â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 echo.
 reg load HKLM\winlite_USER MOUNT\Users\Default\NTUSER.DAT
 if %errorlevel% equ 0 (
@@ -289,14 +289,14 @@ title Windows Lite Self Edition by Irochi - Removing Start Menu Bloatware Icons.
 cls
 echo.
 echo.
-echo ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡
+echo â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 echo.
 echo    Windows Lite Self Edition
 echo.
 echo.
-echo     ½ÃÀÛ ¸Þ´º¸¦ Á¤¸®ÇÏ´Â Áß...
+echo     ì‹œìž‘ ë©”ë‰´ë¥¼ ì •ë¦¬í•˜ëŠ” ì¤‘...
 echo.
-echo ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡
+echo â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 echo.
 if "%windows_build%"=="%win10_build%" (
     copy resources\LayoutModification.xml MOUNT\Users\Default\AppData\Local\Microsoft\Windows\Shell
@@ -313,14 +313,14 @@ title Windows Lite Self Edition by Irochi - Removing OneDrive...
 cls
 echo.
 echo.
-echo ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡
+echo â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 echo.
 echo    Windows Lite Self Edition
 echo.
 echo.
-echo     OneDrive¸¦ »èÁ¦ÇÏ´Â Áß...
+echo     OneDriveë¥¼ ì‚­ì œí•˜ëŠ” ì¤‘...
 echo.
-echo ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡
+echo â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 echo.
 if exist "MOUNT\Windows\System32\OneDriveSetup.exe" (
     takeown /F "MOUNT\Windows\System32\OneDriveSetup.exe"
@@ -344,20 +344,20 @@ title Windows Lite Self Edition by Irochi - Finishing...
 cls
 echo.
 echo.
-echo ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡
+echo â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 echo.
 echo    Windows Lite Self Edition
 echo.
 echo.
-echo       ÀÛ¾÷À» ¿Ï·áÇÏ´Â Áß...
+echo       ìž‘ì—…ì„ ì™„ë£Œí•˜ëŠ” ì¤‘...
 echo.
-echo ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡
+echo â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 echo.
 dism /cleanup-image /image:MOUNT /startcomponentcleanup /resetbase
 dism /unmount-wim /mountdir:MOUNT /commit
 if %errorlevel% neq 0 (
-    set "ErrorStr1=ÀÌ¹ÌÁö ¾ð¸¶¿îÆ®¿¡ ½ÇÆÐÇß½À´Ï´Ù."
-    set "ErrorStr2=µð½ºÅ© °ø°£ÀÌ ºÎÁ·ÇÏ°Å³ª ÆÄÀÏÀÌ »ç¿ë ÁßÀÏ ¼ö ÀÖ½À´Ï´Ù."
+    set "ErrorStr1=ì´ë¯¸ì§€ ì–¸ë§ˆìš´íŠ¸ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤."
+    set "ErrorStr2=ë””ìŠ¤í¬ ê³µê°„ì´ ë¶€ì¡±í•˜ê±°ë‚˜ íŒŒì¼ì´ ì‚¬ìš© ì¤‘ì¼ ìˆ˜ ìžˆìŠµë‹ˆë‹¤."
     goto error
 )
 rmdir /q /s MOUNT >nul 2>&1
@@ -367,17 +367,17 @@ goto optimize
 cls
 echo.
 echo.
-echo ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡
+echo â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 echo.
 echo    Windows Lite Self Edition
 echo.
 echo.
-echo   ÀÌ¹ÌÁö¸¦ ÃÖÀûÈ­ÇÒ±î¿ä? (Y/N)
+echo   ì´ë¯¸ì§€ë¥¼ ìµœì í™”í• ê¹Œìš”? (Y/N)
 echo.
-echo ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡
+echo â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 echo.
 
-choice /c YN /m "ÃÖÀûÈ­ÇÒ±î¿ä"
+choice /c YN /m "ìµœì í™”í• ê¹Œìš”"
 if errorlevel 2 goto set_custom_edition
 if errorlevel 1 "resources\wimlib\wimlib-imagex.exe" optimize install.wim --solid
 
@@ -385,16 +385,16 @@ if errorlevel 1 "resources\wimlib\wimlib-imagex.exe" optimize install.wim --soli
 cls
 echo.
 echo.
-echo ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡
+echo â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 echo.
 echo    Windows Lite Self Edition
 echo.
-echo ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡
+echo â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 echo.
 set "name="
-set /p name=¿øÇÏ´Â Ä¿½ºÅÒ ¿¡µð¼Ç ÀÌ¸§À» ÀÔ·ÂÇØÁÖ¼¼¿ä:
+set /p name=ì›í•˜ëŠ” ì»¤ìŠ¤í…€ ì—ë””ì…˜ ì´ë¦„ì„ ìž…ë ¥í•´ì£¼ì„¸ìš”:
 set "descr="
-set /p descr=¿øÇÏ´Â Ä¿½ºÅÒ ¿¡µð¼Ç ¼³¸íÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä:
+set /p descr=ì›í•˜ëŠ” ì»¤ìŠ¤í…€ ì—ë””ì…˜ ì„¤ëª…ì„ ìž…ë ¥í•´ì£¼ì„¸ìš”:
 call :validate_text name
 if "%text_ok%" equ "0" (
     goto set_custom_edition
@@ -412,14 +412,14 @@ cls
 color 1F
 echo.
 echo.
-echo ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡
+echo â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 echo.
 echo    Windows Lite Self Edition
 echo.
-echo       ¸ðµç ÀÛ¾÷ÀÌ ³¡³µ½À´Ï´Ù!
-echo   install.wim ÆÄÀÏÀ» »ç¿ëÇØÁÖ¼¼¿ä
+echo       ëª¨ë“  ìž‘ì—…ì´ ëë‚¬ìŠµë‹ˆë‹¤!
+echo   install.wim íŒŒì¼ì„ ì‚¬ìš©í•´ì£¼ì„¸ìš”
 echo.
-echo ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡
+echo â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 echo.
 pause
 exit
@@ -430,16 +430,16 @@ cls
 color 4F
 echo.
 echo.
-echo ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡
+echo â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 echo.
 echo    Windows Lite Self Edition
 echo.
-echo    ¿À·ù:
+echo    ì˜¤ë¥˜:
 echo.
 echo    %ErrorStr1%
 echo    %ErrorStr2%
 echo.
-echo ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡
+echo â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 echo.
 pause
 exit
@@ -449,35 +449,35 @@ title Windows Lite Self Edition by Irochi (https://irochi.moe)
 cls
 echo.
 echo.
-echo ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡
+echo â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 echo.
-echo     wimlibÀ» Ã£À» ¼ö ¾ø½À´Ï´Ù.
+echo     wimlibì„ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.
 echo.
 echo.
-echo       ´Ù¿î·Îµå¸¦ ½ÃµµÇÕ´Ï´Ù.
+echo       ë‹¤ìš´ë¡œë“œë¥¼ ì‹œë„í•©ë‹ˆë‹¤.
 echo.
-echo ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡
+echo â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 echo.
 
 curl -s -f -o "tmp.zip" "https://wimlib.net/downloads/wimlib-1.14.4-windows-x86_64-bin.zip"
 if %errorlevel% neq 0 (
     del "tmp.zip" >nul 2>&1
-    set "ErrorStr1=wimlib ´Ù¿î·Îµå¿¡ ½ÇÆÐÇß½À´Ï´Ù."
-    set "ErrorStr2=ÀÎÅÍ³Ý ¿¬°áÀ» È®ÀÎÇØÁÖ¼¼¿ä."
+    set "ErrorStr1=wimlib ë‹¤ìš´ë¡œë“œì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤."
+    set "ErrorStr2=ì¸í„°ë„· ì—°ê²°ì„ í™•ì¸í•´ì£¼ì„¸ìš”."
     goto error
 )
 if not exist "resources\wimlib" mkdir resources\wimlib
 tar -xf "tmp.zip" -C resources\wimlib
 if %errorlevel% neq 0 (
     del "tmp.zip" >nul 2>&1
-    set "ErrorStr1=wimlib ´Ù¿î·Îµå¿¡ ½ÇÆÐÇß½À´Ï´Ù."
-    set "ErrorStr2=ÀÎÅÍ³Ý ¿¬°áÀ» È®ÀÎÇØÁÖ¼¼¿ä."
+    set "ErrorStr1=wimlib ë‹¤ìš´ë¡œë“œì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤."
+    set "ErrorStr2=ì¸í„°ë„· ì—°ê²°ì„ í™•ì¸í•´ì£¼ì„¸ìš”."
     goto error
 )
 if not exist "resources\wimlib\wimlib-imagex.exe" (
     del "tmp.zip" >nul 2>&1
-    set "ErrorStr1=wimlib-imagex.exeÀ»(¸¦) Ã£À» ¼ö ¾ø½À´Ï´Ù."
-    set "ErrorStr2=ÆÄÀÏÀ» Á¤»óÀûÀ¸·Î ´Ù¿î·ÎµåÇß´ÂÁö È®ÀÎÇØÁÖ¼¼¿ä."
+    set "ErrorStr1=wimlib-imagex.exeì„(ë¥¼) ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤."
+    set "ErrorStr2=íŒŒì¼ì„ ì •ìƒì ìœ¼ë¡œ ë‹¤ìš´ë¡œë“œí–ˆëŠ”ì§€ í™•ì¸í•´ì£¼ì„¸ìš”."
     goto error
 )
 del "tmp.zip" >nul 2>&1

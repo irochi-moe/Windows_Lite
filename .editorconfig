@@ -7,9 +7,18 @@ insert_final_newline = true
 indent_style = space
 indent_size = 4
 
-
 [*.bat]
+charset = unset
 end_of_line = crlf
+
+[*.reg]
+charset = utf-16le
+end_of_line = crlf
+insert_final_newline = false
+
+[*.xml]
+indent_style = tab
+insert_final_newline = false
 
 [*.yml]
 indent_size = 2

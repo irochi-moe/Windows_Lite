@@ -1,9 +1,5 @@
 * text=auto eol=lf
 
-*.sh text eol=lf
-gradlew text eol=lf
-*.bat text eol=crlf
-
-*.jar binary
-
+*.bat text eol=crlf working-tree-encoding=CP949
 *.reg working-tree-encoding=UTF-16LE-BOM eol=CRLF
+*.bin binary
