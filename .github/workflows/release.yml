@@ -14,6 +14,7 @@ jobs:
 
     env:
       VERSION: ${{ github.ref_name }}
+      REF: ${{ github.ref }}
 
     steps:
       - name: Code checkout
@@ -44,8 +45,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          CURR_TAG="${{ github.ref_name }}"
-          PREV_TAG="$(git describe --tags --abbrev=0 "${{ github.ref }}"^ 2>/dev/null || true)"
+          CURR_TAG="${VERSION}"
+          PREV_TAG="$(git describe --tags --abbrev=0 "${REF}"^ 2>/dev/null || true)"
 
           echo "Current tag : ${CURR_TAG}"
           if [ -n "${PREV_TAG}" ]; then
@@ -57,7 +58,7 @@ jobs:
             RANGE="${FIRST}..${CURR_TAG}"
           fi
 
-          git log --no-merges --pretty=format:"- %s (%h)" ${RANGE} > RELEASE_CHANGELOG
+          git log --no-merges --pretty=format:"- %s (%h)" "${RANGE}" > RELEASE_CHANGELOG
           if [ ! -s RELEASE_CHANGELOG ]; then
             echo "No changes" > RELEASE_CHANGELOG
           fi
