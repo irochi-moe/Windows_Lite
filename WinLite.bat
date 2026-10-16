@@ -9,7 +9,7 @@ cd /d "%~dp0" || (
     goto error
 )
 whoami /groups | findstr /i "S-1-16-12288" >nul
-if "%errorlevel%" NEQ "0" (
+if %errorlevel% neq 0 (
     set "ErrorStr1=관리자 권한이 필요합니다."
     set "ErrorStr2=WinLite.bat 파일을 우클릭해 관리자 권한으로 실행해주세요."
     goto error
@@ -21,6 +21,8 @@ if not exist "install.wim" (
     goto error
 )
 
+set "supported_build=26300"
+set "win10_build=19045"
 set "windows_build="
 for /f "tokens=4 delims=. " %%a in ('dism /Get-WimInfo /WimFile:install.wim /index:1 ^| findstr "버전" ^| find /N /V "" ^| find "[2]"') do set "windows_build=%%a"
 
@@ -30,7 +32,7 @@ if "%windows_build%"=="" (
     goto error
 )
 
-if "%windows_build%"=="19045" (
+if "%windows_build%"=="%win10_build%" (
     set "RequiredResources=resources\winlite_USER.reg resources\winlite_SOFTWARE.reg resources\LayoutModification.xml"
 ) else (
     set "RequiredResources=resources\start.bin resources\winlite_11_SOFTWARE.reg resources\winlite_11_USER.reg"
@@ -47,7 +49,7 @@ for %%f in (%RequiredResources%) do (
 if not exist "resources\wimlib\wimlib-imagex.exe" goto download_wimlib
 
 :check_build_version
-if not "%windows_build%"=="26200" (
+if not "%windows_build%"=="%supported_build%" (
     title Windows Lite Self Edition by Irochi - Build Warning
     cls
     echo.
@@ -57,7 +59,7 @@ if not "%windows_build%"=="26200" (
     echo    Windows Lite Self Edition
     echo.
     echo   install.wim 빌드: %windows_build%
-    echo   스크립트 지원 빌드: 26200
+    echo   스크립트 지원 빌드: %supported_build%
     echo.
     echo   이 빌드는 더 이상 지원되지 않습니다.
     echo  예상치 못한 문제가 발생할 수 있습니다.
@@ -264,21 +266,21 @@ echo ──────────────────────────────
 echo.
 reg load HKLM\winlite_USER MOUNT\Users\Default\NTUSER.DAT
 if %errorlevel% equ 0 (
-   if "%windows_build%"=="19045" (
-       reg import resources\winlite_USER.reg
-   ) else (
-       reg import resources\winlite_11_USER.reg
-   )
-   reg unload HKLM\winlite_USER
+    if "%windows_build%"=="%win10_build%" (
+        reg import resources\winlite_USER.reg
+    ) else (
+        reg import resources\winlite_11_USER.reg
+    )
+    reg unload HKLM\winlite_USER
 )
 reg load HKLM\winlite_SOFTWARE MOUNT\Windows\System32\Config\SOFTWARE
 if %errorlevel% equ 0 (
-   if "%windows_build%"=="19045" (
-       reg import resources\winlite_SOFTWARE.reg
-   ) else (
-       reg import resources\winlite_11_SOFTWARE.reg
-   )
-   reg unload HKLM\winlite_SOFTWARE
+    if "%windows_build%"=="%win10_build%" (
+        reg import resources\winlite_SOFTWARE.reg
+    ) else (
+        reg import resources\winlite_11_SOFTWARE.reg
+    )
+    reg unload HKLM\winlite_SOFTWARE
 )
 goto cleanup_startmenu
 
@@ -296,7 +298,7 @@ echo     시작 메뉴를 정리하는 중...
 echo.
 echo ──────────────────────────────
 echo.
-if "%windows_build%"=="19045" (
+if "%windows_build%"=="%win10_build%" (
     copy resources\LayoutModification.xml MOUNT\Users\Default\AppData\Local\Microsoft\Windows\Shell
 ) else (
     if not exist "MOUNT\Users\Default\AppData\Local\Packages\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\LocalState" (
