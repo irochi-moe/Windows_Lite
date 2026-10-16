@@ -3,24 +3,16 @@
 rem Windows Lite Self Edition by Irochi (https://irochi.moe)
 rem v2.7
 
-cd /d %~dp0
+cd /d "%~dp0" || (
+    set "ErrorStr1=WinLite.bat을(를) 찾을 수 없습니다."
+    set "ErrorStr2=파일을 정상적으로 다운로드했는지 확인해주세요."
+    goto error
+)
 whoami /groups | findstr /i "S-1-16-12288" >nul
 if "%errorlevel%" NEQ "0" (
     set "ErrorStr1=관리자 권한이 필요합니다."
     set "ErrorStr2=WinLite.bat 파일을 우클릭해 관리자 권한으로 실행해주세요."
     goto error
-)
-
-for %%f in (
-    resources\start.bin
-    resources\winlite_11_SOFTWARE.reg
-    resources\winlite_11_USER.reg
-) do (
-    if not exist "%%f" (
-        set "ErrorStr1=%%f을(를) 찾을 수 없습니다."
-        set "ErrorStr2=파일을 정상적으로 다운로드했는지 확인해주세요."
-        goto error
-    )
 )
 
 if not exist "install.wim" (
@@ -29,7 +21,27 @@ if not exist "install.wim" (
     goto error
 )
 
+set "windows_build="
 for /f "tokens=4 delims=. " %%a in ('dism /Get-WimInfo /WimFile:install.wim /index:1 ^| findstr "버전" ^| find /N /V "" ^| find "[2]"') do set "windows_build=%%a"
+
+if "%windows_build%"=="" (
+    set "ErrorStr1=install.wim 버전을(를) 찾을 수 없습니다."
+    set "ErrorStr2=순정 윈도우 이미지에서 파일을 가져와주세요."
+    goto error
+)
+
+if "%windows_build%"=="19045" (
+    set "RequiredResources=resources\winlite_USER.reg resources\winlite_SOFTWARE.reg resources\LayoutModification.xml"
+) else (
+    set "RequiredResources=resources\start.bin resources\winlite_11_SOFTWARE.reg resources\winlite_11_USER.reg"
+)
+for %%f in (%RequiredResources%) do (
+    if not exist "%%f" (
+        set "ErrorStr1=%%f을(를) 찾을 수 없습니다."
+        set "ErrorStr2=파일을 정상적으로 다운로드했는지 확인해주세요."
+        goto error
+    )
+)
 
 :check_installation
 if not exist "resources\wimlib\wimlib-imagex.exe" goto download_wimlib
@@ -76,9 +88,10 @@ echo.
 pause
 cls
 dism /Get-WimInfo /wimfile:install.wim
+set "index="
 set /p index=작업할 에디션의 인덱스 번호를 입력해주세요 :
-echo %index%| findstr /r "^[1-9][0-9]*$" >nul
-if %errorlevel% equ 0 (
+call :validate_index
+if "%index_ok%" equ "1" (
     goto mount
 ) else (
     goto main
@@ -251,7 +264,7 @@ echo ──────────────────────────────
 echo.
 reg load HKLM\winlite_USER MOUNT\Users\Default\NTUSER.DAT
 if %errorlevel% equ 0 (
-   if %windows_build% == 19045 (
+   if "%windows_build%"=="19045" (
        reg import resources\winlite_USER.reg
    ) else (
        reg import resources\winlite_11_USER.reg
@@ -260,7 +273,7 @@ if %errorlevel% equ 0 (
 )
 reg load HKLM\winlite_SOFTWARE MOUNT\Windows\System32\Config\SOFTWARE
 if %errorlevel% equ 0 (
-   if %windows_build% == 19045 (
+   if "%windows_build%"=="19045" (
        reg import resources\winlite_SOFTWARE.reg
    ) else (
        reg import resources\winlite_11_SOFTWARE.reg
@@ -283,7 +296,7 @@ echo     시작 메뉴를 정리하는 중...
 echo.
 echo ──────────────────────────────
 echo.
-if %windows_build% == 19045 (
+if "%windows_build%"=="19045" (
     copy resources\LayoutModification.xml MOUNT\Users\Default\AppData\Local\Microsoft\Windows\Shell
 ) else (
     if not exist "MOUNT\Users\Default\AppData\Local\Packages\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\LocalState" (
@@ -376,8 +389,18 @@ echo    Windows Lite Self Edition
 echo.
 echo ──────────────────────────────
 echo.
+set "name="
 set /p name=원하는 커스텀 에디션 이름을 입력해주세요:
+set "descr="
 set /p descr=원하는 커스텀 에디션 설명을 입력해주세요:
+call :validate_text name
+if "%text_ok%" equ "0" (
+    goto set_custom_edition
+)
+call :validate_text descr
+if "%text_ok%" equ "0" (
+    goto set_custom_edition
+)
 "resources\wimlib\wimlib-imagex.exe" info install.wim %index% "%name%" "%descr%" --image-property DISPLAYNAME="%name%" --image-property DISPLAYDESCRIPTION="%descr%"
 goto finish
 
@@ -434,13 +457,55 @@ echo.
 echo ──────────────────────────────
 echo.
 
-curl -s -o "tmp.zip" "https://wimlib.net/downloads/wimlib-1.14.4-windows-x86_64-bin.zip"
+curl -s -f -o "tmp.zip" "https://wimlib.net/downloads/wimlib-1.14.4-windows-x86_64-bin.zip"
 if %errorlevel% neq 0 (
+    del "tmp.zip" >nul 2>&1
     set "ErrorStr1=wimlib 다운로드에 실패했습니다."
     set "ErrorStr2=인터넷 연결을 확인해주세요."
     goto error
 )
 if not exist "resources\wimlib" mkdir resources\wimlib
 tar -xf "tmp.zip" -C resources\wimlib
+if %errorlevel% neq 0 (
+    del "tmp.zip" >nul 2>&1
+    set "ErrorStr1=wimlib 다운로드에 실패했습니다."
+    set "ErrorStr2=인터넷 연결을 확인해주세요."
+    goto error
+)
+if not exist "resources\wimlib\wimlib-imagex.exe" (
+    del "tmp.zip" >nul 2>&1
+    set "ErrorStr1=wimlib-imagex.exe을(를) 찾을 수 없습니다."
+    set "ErrorStr2=파일을 정상적으로 다운로드했는지 확인해주세요."
+    goto error
+)
 del "tmp.zip" >nul 2>&1
 goto check_installation
+
+:validate_index
+setlocal EnableDelayedExpansion
+set "index_ok=0"
+set "rest=!index!#"
+set "rest=!rest:0=!"
+set "rest=!rest:1=!"
+set "rest=!rest:2=!"
+set "rest=!rest:3=!"
+set "rest=!rest:4=!"
+set "rest=!rest:5=!"
+set "rest=!rest:6=!"
+set "rest=!rest:7=!"
+set "rest=!rest:8=!"
+set "rest=!rest:9=!"
+if "!rest!"=="#" set "index_ok=1"
+if "!index:~0,1!"=="0" set "index_ok=0"
+if "!index!"=="" set "index_ok=0"
+endlocal & set "index_ok=%index_ok%"
+goto :eof
+
+:validate_text
+setlocal EnableDelayedExpansion
+set "text_ok=1"
+set "probe=!%1!#"
+set "stripped=!probe:"=!"
+if not "!stripped!"=="!probe!" set "text_ok=0"
+endlocal & set "text_ok=%text_ok%"
+goto :eof
