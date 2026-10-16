@@ -10,7 +10,7 @@ whoami /groups | findstr /i "S-1-16-12288" >nul || call :fail "관리자 권한�
 if not exist "install.wim" call :fail "install.wim을(를) 찾을 수 없습니다." "순정 윈도우 이미지에서 파일을 가져와주세요."
 
 set "windows_build="
-for /f "tokens=4 delims=. " %%a in ('dism /Get-WimInfo /WimFile:install.wim /Index:1 ^| findstr "버전" ^| find /N /V "" ^| find "[2]"') do set "windows_build=%%a"
+for /f "tokens=3 delims=." %%a in ('dism /Get-WimInfo /WimFile:install.wim /Index:1 ^| findstr /R /C:" 10\.0\.[0-9][0-9]*$"') do set "windows_build=%%a"
 if "%windows_build%"=="" call :fail "install.wim 버전을(를) 찾을 수 없습니다." "순정 윈도우 이미지에서 파일을 가져와주세요."
 
 if "%windows_build%"=="19045" (
