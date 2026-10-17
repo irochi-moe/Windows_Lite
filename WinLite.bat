@@ -37,7 +37,7 @@ choice /c YN /m "계속 진행하시겠습니까"
 if errorlevel 2 exit
 
 :main
-call :banner "" "" "" " by Irochi (https://irochi.moe)" "" "              v2.7"
+call :banner "" "" "" " by Irochi (https://irochi.moe)" "" "              v2.9"
 pause
 cls
 dism /Get-WimInfo /WimFile:install.wim
