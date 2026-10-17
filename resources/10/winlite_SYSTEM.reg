@@ -1,0 +1,27 @@
+Windows Registry Editor Version 5.00
+
+; Windows Lite 10 Registry by Irochi (https://irochi.moe) for HKEY_LOCAL_MACHINE\SYSTEM
+
+; BitLocker 자동 장치 암호화 비활성화
+[HKEY_LOCAL_MACHINE\SYSTEM_winlite\ControlSet001\Control\BitLocker]
+"PreventDeviceEncryption"=dword:00000001
+
+; 260자 경로 길이 제한 해제
+[HKEY_LOCAL_MACHINE\SYSTEM_winlite\ControlSet001\Control\FileSystem]
+"LongPathsEnabled"=dword:00000001
+
+; 빠른 시작 비활성화
+[HKEY_LOCAL_MACHINE\SYSTEM_winlite\ControlSet001\Control\Session Manager\Power]
+"HiberbootEnabled"=dword:00000000
+
+; 서비스 프로세스(svchost) 분리 비활성화
+[HKEY_LOCAL_MACHINE\SYSTEM_winlite\ControlSet001\Control]
+"SvcHostSplitThresholdInKB"=dword:10000000
+
+; 원격 분석 서비스(DiagTrack) 비활성화
+[HKEY_LOCAL_MACHINE\SYSTEM_winlite\ControlSet001\Services\DiagTrack]
+"Start"=dword:00000004
+
+; 검색 색인(Windows Search) 서비스 비활성화
+[HKEY_LOCAL_MACHINE\SYSTEM_winlite\ControlSet001\Services\WSearch]
+"Start"=dword:00000004

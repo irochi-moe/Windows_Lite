@@ -22,7 +22,7 @@ if "%windows_build%"=="19045" (
     set "start_file=start.bin"
     set "start_dir=MOUNT\Users\Default\AppData\Local\Packages\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\LocalState"
 )
-for %%f in ("%res_dir%\winlite_USER.reg" "%res_dir%\winlite_SOFTWARE.reg" "%res_dir%\%start_file%") do (
+for %%f in ("%res_dir%\winlite_USER.reg" "%res_dir%\winlite_SOFTWARE.reg" "%res_dir%\winlite_SYSTEM.reg" "%res_dir%\%start_file%") do (
     if not exist "%%~f" call :fail "%%~f을(를) 찾을 수 없습니다." "파일을 정상적으로 다운로드했는지 확인해주세요."
 )
 
@@ -152,6 +152,7 @@ call :force_delete "MOUNT\PerfLogs"
 call :banner "Modifying registry..." "" "" "    레지스트리를 수정하는 중..."
 call :import_hive USER "MOUNT\Users\Default\NTUSER.DAT"
 call :import_hive SOFTWARE "MOUNT\Windows\System32\Config\SOFTWARE"
+call :import_hive SYSTEM "MOUNT\Windows\System32\Config\SYSTEM"
 
 :cleanup_startmenu
 call :banner "Cleaning up Start menu..." "" "" "    시작 메뉴를 정리하는 중..."
