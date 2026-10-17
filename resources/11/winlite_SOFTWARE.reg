@@ -3,62 +3,62 @@ Windows Registry Editor Version 5.00
 ; Windows Lite 11 Registry by Irochi (https://irochi.moe) for HKEY_LOCAL_MACHINE\SOFTWARE
 
 ; 예약된 저장소 7GB 비활성화
-[HKEY_LOCAL_MACHINE\winlite_SOFTWARE\Microsoft\Windows\CurrentVersion\ReserveManager]
+[HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Microsoft\Windows\CurrentVersion\ReserveManager]
 "ShippedWithReserves"=dword:00000000
 
 ; New Outlook 설치 비활성화
-[HKEY_LOCAL_MACHINE\winlite_SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Orchestrator\UScheduler\OutlookUpdate]
+[HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Microsoft\Windows\CurrentVersion\WindowsUpdate\Orchestrator\UScheduler\OutlookUpdate]
 "workCompleted"=dword:00000001
-[HKEY_LOCAL_MACHINE\winlite_SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Orchestrator\UScheduler_Oobe\OutlookUpdate]
+[HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Microsoft\Windows\CurrentVersion\WindowsUpdate\Orchestrator\UScheduler_Oobe\OutlookUpdate]
 "workCompleted"=dword:00000001
-[HKEY_LOCAL_MACHINE\winlite_SOFTWARE\Policies\Microsoft\Windows\Windows Mail]
+[HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Policies\Microsoft\Windows\Windows Mail]
 "PreventRun"=dword:00000001
-[-HKEY_LOCAL_MACHINE\winlite_SOFTWARE\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\OutlookUpdate]
+[-HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\OutlookUpdate]
 
 ; Dev Home 설치 비활성화
-[HKEY_LOCAL_MACHINE\winlite_SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Orchestrator\UScheduler\DevHomeUpdate]
+[HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Microsoft\Windows\CurrentVersion\WindowsUpdate\Orchestrator\UScheduler\DevHomeUpdate]
 "workCompleted"=dword:00000001
-[-HKEY_LOCAL_MACHINE\winlite_SOFTWARE\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\DevHomeUpdate]
+[-HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\DevHomeUpdate]
 
 ; Teams 설치 비활성화
-[HKEY_LOCAL_MACHINE\winlite_SOFTWARE\Policies\Microsoft\Teams]
+[HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Policies\Microsoft\Teams]
 "DisableInstallation"=dword:00000001
 
 ; OneDrive Sync 비활성화
-[HKEY_LOCAL_MACHINE\winlite_SOFTWARE\Policies\Microsoft\Windows\OneDrive]
+[HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Policies\Microsoft\Windows\OneDrive]
 "DisableFileSyncNGSC"=dword:00000001
 
 ; 블로트웨어 설치 비활성화
-[HKEY_LOCAL_MACHINE\winlite_SOFTWARE\Policies\Microsoft\Windows\CloudContent]
+[HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Policies\Microsoft\Windows\CloudContent]
 "DisableWindowsConsumerFeatures"=dword:00000001
 "DisableConsumerAccountStateContent"=dword:00000001
 "DisableCloudOptimizedContent"=dword:00000001
-[HKEY_LOCAL_MACHINE\winlite_SOFTWARE\Microsoft\PolicyManager\current\device\Start]
+[HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Microsoft\PolicyManager\current\device\Start]
 "ConfigureStartPins"="{\"pinnedList\": [{}]}"
-[HKEY_LOCAL_MACHINE\winlite_SOFTWARE\Policies\Microsoft\PushToInstall]
+[HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Policies\Microsoft\PushToInstall]
 "DisablePushToInstall"=dword:00000001
-[HKEY_LOCAL_MACHINE\winlite_SOFTWARE\Policies\Microsoft\MRT]
+[HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Policies\Microsoft\MRT]
 "DontOfferThroughWUAU"=dword:00000001
 
 ; 로컬 계정 설치 활성화
-[HKEY_LOCAL_MACHINE\winlite_SOFTWARE\Microsoft\Windows\CurrentVersion\OOBE]
+[HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Microsoft\Windows\CurrentVersion\OOBE]
 "BypassNRO"=dword:00000001
 "HideOnlineAccountScreens"=dword:00000001
 
 ; Chat Icon 비활성화
-[HKEY_LOCAL_MACHINE\winlite_SOFTWARE\Policies\Microsoft\Windows\Windows Chat]
+[HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Policies\Microsoft\Windows\Windows Chat]
 "ChatIcon"=dword:00000003
-[HKEY_LOCAL_MACHINE\winlite_SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+[HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
 "TaskbarMn"=dword:00000000
 
 ; 개인정보 수집 비활성화
-[HKEY_LOCAL_MACHINE\winlite_SOFTWARE\Policies\Microsoft\Windows\DataCollection]
+[HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Policies\Microsoft\Windows\DataCollection]
 "AllowTelemetry"=dword:00000000
 
 ; 무의미한 잠금화면 비활성화
-[HKEY_LOCAL_MACHINE\winlite_SOFTWARE\Policies\Microsoft\Windows\Personalization]
+[HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Policies\Microsoft\Windows\Personalization]
 "NoLockScreen"=dword:00000001
 
 ; Alt+Tab 화면 깜빡임 해결
-[HKEY_LOCAL_MACHINE\winlite_SOFTWARE\Microsoft\Windows\Dwm]
+[HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Microsoft\Windows\Dwm]
 "OverlayMinFPS"=dword:00000000

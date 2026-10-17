@@ -230,9 +230,9 @@ pause
 exit
 
 :import_hive
-reg load "HKLM\winlite_%~1" "%~2" || goto :eof
+reg load "HKLM\%~1_winlite" "%~2" || goto :eof
 reg import "%res_dir%\winlite_%~1.reg"
-reg unload "HKLM\winlite_%~1"
+reg unload "HKLM\%~1_winlite"
 goto :eof
 
 :force_delete

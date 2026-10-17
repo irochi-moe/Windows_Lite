@@ -3,42 +3,42 @@ Windows Registry Editor Version 5.00
 ; Windows Lite 10 Registry by Irochi (https://irochi.moe) for HKEY_LOCAL_MACHINE\SOFTWARE
 
 ; 예약된 저장소 7GB 비활성화
-[HKEY_LOCAL_MACHINE\winlite_SOFTWARE\Microsoft\Windows\CurrentVersion\ReserveManager]
+[HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Microsoft\Windows\CurrentVersion\ReserveManager]
 "ShippedWithReserves"=dword:00000000
 
 ; New Outlook 설치 비활성화
-[HKEY_LOCAL_MACHINE\winlite_SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Orchestrator\UScheduler\OutlookUpdate]
+[HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Microsoft\Windows\CurrentVersion\WindowsUpdate\Orchestrator\UScheduler\OutlookUpdate]
 "workCompleted"=dword:00000001
-[-HKEY_LOCAL_MACHINE\winlite_SOFTWARE\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\OutlookUpdate]
+[-HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\OutlookUpdate]
 
 ; Dev Home 설치 비활성화
-[HKEY_LOCAL_MACHINE\winlite_SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Orchestrator\UScheduler\DevHomeUpdate]
+[HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Microsoft\Windows\CurrentVersion\WindowsUpdate\Orchestrator\UScheduler\DevHomeUpdate]
 "workCompleted"=dword:00000001
-[-HKEY_LOCAL_MACHINE\winlite_SOFTWARE\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\DevHomeUpdate]
+[-HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\DevHomeUpdate]
 
 ; OneDrive Sync 비활성화
-[HKEY_LOCAL_MACHINE\winlite_SOFTWARE\Policies\Microsoft\Windows\OneDrive]
+[HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Policies\Microsoft\Windows\OneDrive]
 "DisableFileSyncNGSC"=dword:00000001
 
 ; 블로트웨어 설치 비활성화
-[HKEY_LOCAL_MACHINE\winlite_SOFTWARE\Policies\Microsoft\Windows\CloudContent]
+[HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Policies\Microsoft\Windows\CloudContent]
 "DisableCloudOptimizedContent"=dword:00000001
 
 ; 내 PC에서 3D 개체 비활성화
-[-HKEY_LOCAL_MACHINE\winlite_SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}]
+[-HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}]
 
 ; Windows 11 업그레이드 비활성화
-[HKEY_LOCAL_MACHINE\winlite_SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate]
+[HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Policies\Microsoft\Windows\WindowsUpdate]
 "TargetReleaseVersion"=dword:00000001
 "ProductVersion"="Windows 10"
 "TargetReleaseVersionInfo"="22H2"
 
 ; 개인정보 수집 비활성화
-[HKEY_LOCAL_MACHINE\winlite_SOFTWARE\Policies\Microsoft\Windows\DataCollection]
+[HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Policies\Microsoft\Windows\DataCollection]
 "AllowTelemetry"=dword:00000000
 
 ; 뉴스 및 관심사 비활성화 (임시)
-[HKEY_LOCAL_MACHINE\winlite_SOFTWARE\Microsoft\PolicyManager\default\NewsAndInterests\AllowNewsAndInterests]
+[HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Microsoft\PolicyManager\default\NewsAndInterests\AllowNewsAndInterests]
 "value"=dword:00000000
-[HKEY_LOCAL_MACHINE\winlite_SOFTWARE\Policies\Microsoft\Windows\Windows Feeds]
+[HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Policies\Microsoft\Windows\Windows Feeds]
 "EnableFeeds"=dword:00000000
