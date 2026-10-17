@@ -2,43 +2,141 @@ Windows Registry Editor Version 5.00
 
 ; Windows Lite 10 Registry by Irochi (https://irochi.moe) for HKEY_LOCAL_MACHINE\SOFTWARE
 
-; 예약된 저장소 7GB 비활성화
+; 예약된 저장소 비활성화
 [HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Microsoft\Windows\CurrentVersion\ReserveManager]
 "ShippedWithReserves"=dword:00000000
 
-; New Outlook 설치 비활성화
+; New Outlook 자동 설치 비활성화
 [HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Microsoft\Windows\CurrentVersion\WindowsUpdate\Orchestrator\UScheduler\OutlookUpdate]
 "workCompleted"=dword:00000001
-[-HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\OutlookUpdate]
 
-; Dev Home 설치 비활성화
+; Dev Home 자동 설치 비활성화
 [HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Microsoft\Windows\CurrentVersion\WindowsUpdate\Orchestrator\UScheduler\DevHomeUpdate]
 "workCompleted"=dword:00000001
-[-HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\DevHomeUpdate]
 
-; OneDrive Sync 비활성화
+; 업데이트 후 Outlook, Teams, Dev Home 재설치 비활성화
+[HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe]
+"BlockedOobeUpdaters"="[\"MS_Outlook\",\"MS_Teams\",\"MS_DevHome\"]"
+
+; OneDrive 파일 동기화 비활성화
 [HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Policies\Microsoft\Windows\OneDrive]
 "DisableFileSyncNGSC"=dword:00000001
 
-; 블로트웨어 설치 비활성화
+; 추천 앱 자동 설치 비활성화 (Home, Pro 에디션 사용불가)
 [HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Policies\Microsoft\Windows\CloudContent]
+"DisableWindowsConsumerFeatures"=dword:00000001
+
+; Microsoft 계정 알림 및 클라우드 추천 콘텐츠 비활성화 (Home, Pro 에디션 사용불가)
+[HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Policies\Microsoft\Windows\CloudContent]
+"DisableConsumerAccountStateContent"=dword:00000001
 "DisableCloudOptimizedContent"=dword:00000001
 
-; 내 PC에서 3D 개체 비활성화
-[-HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}]
+; 웹에서 원격 앱 설치 비활성화
+[HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Policies\Microsoft\PushToInstall]
+"DisablePushToInstall"=dword:00000001
 
-; Windows 11 업그레이드 비활성화
+; Windows Update 악성 소프트웨어 제거 도구 설치 비활성화
+[HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Policies\Microsoft\MRT]
+"DontOfferThroughWUAU"=dword:00000001
+
+; 인터넷 연결 및 Microsoft 계정 없이 설치 활성화
+[HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Microsoft\Windows\CurrentVersion\OOBE]
+"BypassNRO"=dword:00000001
+"HideOnlineAccountScreens"=dword:00000001
+
+; 작업 표시줄 지금 모임 시작 버튼 숨기기
+[HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Microsoft\Windows\CurrentVersion\Policies\Explorer]
+"HideSCAMeetNow"=dword:00000001
+
+; 내 PC에서 3D 개체 폴더 숨기기
+[-HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}]
+[-HKEY_LOCAL_MACHINE\SOFTWARE_winlite\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}]
+
+; Windows 11 업그레이드 비활성화 (22H2 버전 고정)
 [HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Policies\Microsoft\Windows\WindowsUpdate]
 "TargetReleaseVersion"=dword:00000001
 "ProductVersion"="Windows 10"
 "TargetReleaseVersionInfo"="22H2"
 
-; 개인정보 수집 비활성화
+; 진단 데이터 수집 최소화 (Home, Pro 에디션은 필수 수준으로 적용)
 [HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Policies\Microsoft\Windows\DataCollection]
 "AllowTelemetry"=dword:00000000
 
-; 뉴스 및 관심사 비활성화 (임시)
-[HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Microsoft\PolicyManager\default\NewsAndInterests\AllowNewsAndInterests]
-"value"=dword:00000000
+; 피드백 요청 알림 비활성화
+[HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Policies\Microsoft\Windows\DataCollection]
+"DoNotShowFeedbackNotifications"=dword:00000001
+
+; 오류 보고 추가 데이터 전송 비활성화
+[HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Policies\Microsoft\Windows\Windows Error Reporting]
+"DontSendAdditionalData"=dword:00000001
+
+; 활동 기록 수집 및 업로드 비활성화
+[HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Policies\Microsoft\Windows\System]
+"EnableActivityFeed"=dword:00000000
+"PublishUserActivities"=dword:00000000
+"UploadUserActivities"=dword:00000000
+
+; 광고 ID 비활성화
+[HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Policies\Microsoft\Windows\AdvertisingInfo]
+"DisabledByGroupPolicy"=dword:00000001
+
+; 잠금 화면 비활성화
+[HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Policies\Microsoft\Windows\Personalization]
+"NoLockScreen"=dword:00000001
+
+; Edge 시작 부스트 및 백그라운드 실행 비활성화
+[HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Policies\Microsoft\Edge]
+"StartupBoostEnabled"=dword:00000000
+"BackgroundModeEnabled"=dword:00000000
+
+; Edge 첫 실행 화면 및 광고 개인화 비활성화
+[HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Policies\Microsoft\Edge]
+"HideFirstRunExperience"=dword:00000001
+"PersonalizationReportingEnabled"=dword:00000000
+
+; Edge 선택 진단 데이터 전송 비활성화 (필수 데이터만 전송)
+[HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Policies\Microsoft\Edge]
+"DiagnosticData"=dword:00000001
+
+; Edge 기능 추천, 쇼핑 도우미, Rewards, 새 탭 뉴스 비활성화 (Microsoft 계정 로그인 프로필 제외)
+[HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Policies\Microsoft\Edge]
+"ShowRecommendationsEnabled"=dword:00000000
+"EdgeShoppingAssistantEnabled"=dword:00000000
+"ShowMicrosoftRewards"=dword:00000000
+"NewTabPageContentEnabled"=dword:00000000
+
+; Edge 바탕화면 바로가기 생성 비활성화
+[HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Policies\Microsoft\EdgeUpdate]
+"CreateDesktopShortcut{56EB18F8-B008-4CBD-B6D2-8C97FE7E9062}"=dword:00000000
+
+; Edge Update로 Copilot 앱 설치 비활성화
+[HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Policies\Microsoft\EdgeUpdate]
+"Install{C50565E9-CCCF-44B4-BA15-5AC5C6569197}"=dword:00000000
+
+; 다른 PC와 업데이트 파일 공유(전송 최적화) 비활성화
+[HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Policies\Microsoft\Windows\DeliveryOptimization]
+"DODownloadMode"=dword:00000000
+
+; Windows Update 드라이버 설치 비활성화
+[HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Policies\Microsoft\Windows\WindowsUpdate]
+"ExcludeWUDriversInQualityUpdate"=dword:00000001
+
+; 장치 연결 시 제조사 앱 및 장치 정보 자동 다운로드 비활성화
+[HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Policies\Microsoft\Windows\Device Metadata]
+"PreventDeviceMetadataFromNetwork"=dword:00000001
+
+; 하드웨어 암호화 드라이브(eDrive) 자동 암호화 비활성화
+[HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Policies\Microsoft\Windows\EnhancedStorageDevices]
+"TCGSecurityActivationDisabled"=dword:00000001
+
+; 검색 하이라이트 비활성화
+[HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Policies\Microsoft\Windows\Windows Search]
+"EnableDynamicContentInWSB"=dword:00000000
+
+; 설정 앱 온라인 팁 비활성화
+[HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Microsoft\Windows\CurrentVersion\Policies\Explorer]
+"AllowOnlineTips"=dword:00000000
+
+; 작업 표시줄 뉴스 및 관심사 비활성화 (임시)
 [HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Policies\Microsoft\Windows\Windows Feeds]
 "EnableFeeds"=dword:00000000

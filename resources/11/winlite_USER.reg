@@ -2,50 +2,87 @@ Windows Registry Editor Version 5.00
 
 ; Windows Lite 11 Registry by Irochi (https://irochi.moe) for HKEY_CURRENT_USER
 
-; OneDrive 삭제
+; 새 사용자 OneDrive 자동 설치 비활성화
 [-HKEY_LOCAL_MACHINE\USER_winlite\Software\Microsoft\Windows\CurrentVersion\Run]
-"OneDriveSetup"=-
 
 ; 탐색기 실행시 내 PC를 기본으로 표시
 [HKEY_LOCAL_MACHINE\USER_winlite\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
 "LaunchTo"=dword:00000001
 
-; Copilot 비활성화
+; 작업 표시줄 Copilot 버튼 및 자동 고정 비활성화 (Home 에디션 사용불가)
 [HKEY_LOCAL_MACHINE\USER_winlite\Software\Policies\Microsoft\Windows\WindowsCopilot]
 "TurnOffWindowsCopilot"=dword:00000001
+[HKEY_LOCAL_MACHINE\USER_winlite\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"ShowCopilotButton"=dword:00000000
 
-; Chat Icon & Widgets 숨기기
+; Recall 및 Click to Do 비활성화 (Home 에디션 사용불가)
+[HKEY_LOCAL_MACHINE\USER_winlite\Software\Policies\Microsoft\Windows\WindowsAI]
+"DisableAIDataAnalysis"=dword:00000001
+"DisableClickToDo"=dword:00000001
+
+; 작업 표시줄 Teams(Chat) 아이콘 자동 고정 비활성화
 [HKEY_LOCAL_MACHINE\USER_winlite\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
 "TaskbarMn"=dword:00000000
-"TaskbarDa"=dword:00000000
 
-; 작업 표시줄에서 작업 보기 버튼 비활성화
+; 작업 표시줄 작업 보기 버튼 숨기기
 [HKEY_LOCAL_MACHINE\USER_winlite\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
 "ShowTaskViewButton"=dword:00000000
 
-; Windows 추천 배경화면 비활성화
-[HKEY_LOCAL_MACHINE\USER_winlite\Software\Policies\Microsoft\Windows\CloudContent]
-"DisableSpotlightCollectionOnDesktop"=dword:00000001
+; Win+X 메뉴에 PowerShell 대신 명령 프롬프트 표시
+[HKEY_LOCAL_MACHINE\USER_winlite\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"DontUsePowerShellOnWinX"=dword:00000001
+
+; 시작 메뉴 Microsoft 계정 알림 비활성화
+[HKEY_LOCAL_MACHINE\USER_winlite\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"Start_AccountNotifications"=dword:00000000
+
+; 시작 메뉴 사용자 아이콘의 계정 알림 정책 비활성화
+[HKEY_LOCAL_MACHINE\USER_winlite\Software\Policies\Microsoft\Windows\CurrentVersion\AccountNotifications]
+"DisableAccountNotifications"=dword:00000001
+
+; 시작 메뉴 팁 및 새 앱 추천 비활성화
+[HKEY_LOCAL_MACHINE\USER_winlite\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"Start_IrisRecommendations"=dword:00000000
+
+; 시작 메뉴에 고정 항목 더 표시
+[HKEY_LOCAL_MACHINE\USER_winlite\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"Start_Layout"=dword:00000001
+
+; 시작 메뉴 전원 버튼 옆에 문서, 다운로드, 네트워크, 개인 폴더, 파일 탐색기, 설정 표시
+[HKEY_LOCAL_MACHINE\USER_winlite\Software\Microsoft\Windows\CurrentVersion\Start]
+"VisiblePlaces"=hex:ce,d5,34,2d,5a,fa,43,45,82,f2,22,e6,ea,f7,77,3c,2f,b3,67,e3,de,89,55,43,bf,ce,61,f3,7b,18,a9,37,bc,24,8a,14,0c,d6,89,42,a0,80,6e,d9,bb,a2,48,82,44,81,75,fe,0d,08,ae,42,8b,da,34,ed,97,b6,63,94,4a,b0,bd,74,4a,f9,68,4f,8b,d6,43,98,07,1d,a8,bc,86,08,73,52,aa,51,43,42,9f,7b,27,76,58,46,59,d4
+
+; 바탕화면 Windows 추천(Spotlight) 배경 비활성화
 [HKEY_LOCAL_MACHINE\USER_winlite\Software\Microsoft\Windows\CurrentVersion\DesktopSpotlight\Settings]
 "EnabledState"=dword:00000000
 
-; Windows 검색에서 웹 결과 표시 비활성화
+; 바탕화면 Windows 추천(Spotlight) 배경 정책 비활성화 (Home, Pro 에디션 사용불가)
+[HKEY_LOCAL_MACHINE\USER_winlite\Software\Policies\Microsoft\Windows\CloudContent]
+"DisableSpotlightCollectionOnDesktop"=dword:00000001
+
+; Windows 검색에서 웹 및 Bing 결과 비활성화
 [HKEY_LOCAL_MACHINE\USER_winlite\Software\Policies\Microsoft\Windows\Explorer]
 "DisableSearchBoxSuggestions"=dword:00000001
 [HKEY_LOCAL_MACHINE\USER_winlite\Software\Microsoft\Windows\CurrentVersion\Search]
 "BingSearchEnabled"=dword:00000000
 
-; Xbox 비활성화
+; 검색 하이라이트 비활성화 (사용자 설정)
+[HKEY_LOCAL_MACHINE\USER_winlite\Software\Microsoft\Windows\CurrentVersion\SearchSettings]
+"IsDynamicSearchBoxEnabled"=dword:00000000
+
+; 작업 표시줄 검색 상자를 아이콘으로 표시
+[HKEY_LOCAL_MACHINE\USER_winlite\Software\Microsoft\Windows\CurrentVersion\Search]
+"SearchboxTaskbarMode"=dword:00000001
+"SearchboxTaskbarModeCache"=dword:00000001
+
+; Xbox 게임 녹화(Game DVR) 비활성화
 [HKEY_LOCAL_MACHINE\USER_winlite\Software\Microsoft\Windows\CurrentVersion\GameDVR]
 "AppCaptureEnabled"=dword:00000000
 [HKEY_LOCAL_MACHINE\USER_winlite\System\GameConfigStore]
 "GameDVR_Enabled"=dword:00000000
 
-; 블로트웨어 팝업 및 알림 비활성화
-[HKEY_LOCAL_MACHINE\USER_winlite\Software\Policies\Microsoft\Windows\CloudContent]
-"DisableWindowsConsumerFeatures"=dword:00000001
+; 추천 앱 자동 설치 및 시작 메뉴·설정 광고 비활성화
 [HKEY_LOCAL_MACHINE\USER_winlite\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager]
-"ContentDeliveryAllowed"=dword:00000000
 "OemPreInstalledAppsEnabled"=dword:00000000
 "PreInstalledAppsEnabled"=dword:00000000
 "PreInstalledAppsEverEnabled"=dword:00000000
@@ -60,18 +97,33 @@ Windows Registry Editor Version 5.00
 "SubscribedContent-338393Enabled"=dword:00000000
 "SubscribedContent-353694Enabled"=dword:00000000
 "SubscribedContent-353696Enabled"=dword:00000000
-[-HKEY_LOCAL_MACHINE\USER_winlite\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager\Subscriptions]
-[-HKEY_LOCAL_MACHINE\USER_winlite\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager\SuggestedApps]
 
-; 장치 설정을 완료합니다 팝업 비활성화
+; 잠금 화면 팁 및 재미있는 정보 비활성화
+[HKEY_LOCAL_MACHINE\USER_winlite\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager]
+"RotatingLockScreenOverlayEnabled"=dword:00000000
+"SubscribedContent-338387Enabled"=dword:00000000
+
+; Spotlight 타사 앱 추천 비활성화
+[HKEY_LOCAL_MACHINE\USER_winlite\Software\Policies\Microsoft\Windows\CloudContent]
+"DisableThirdPartySuggestions"=dword:00000001
+
+; '장치 설정을 완료합니다' 팝업 비활성화
 [HKEY_LOCAL_MACHINE\USER_winlite\Software\Microsoft\Windows\CurrentVersion\UserProfileEngagement]
 "ScoobeSystemSettingEnabled"=dword:00000000
 
-; 파일 탐색기 [동기화 공급자 알림 표시] 옵션 끄기
+; 설치 후 첫 로그인 1시간 방해 금지 모드 비활성화
+[HKEY_LOCAL_MACHINE\USER_winlite\Software\Microsoft\Windows\CurrentVersion\Notifications\QuietHours\PostOOBETimer]
+"FirstRunTime"=hex:00,10,5e,5f,00,00,00,00
+
+; 파일 탐색기 동기화 공급자 알림 비활성화
 [HKEY_LOCAL_MACHINE\USER_winlite\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
 "ShowSyncProviderNotifications"=dword:00000000
 
-; 개인정보 수집 비활성화
+; 탐색기 홈의 Office.com 클라우드 파일 숨기기 (사용자 설정)
+[HKEY_LOCAL_MACHINE\USER_winlite\Software\Microsoft\Windows\CurrentVersion\Explorer]
+"ShowCloudFilesInQuickAccess"=dword:00000000
+
+; 광고 ID, 맞춤형 환경, 입력·음성 데이터 수집 비활성화
 [HKEY_LOCAL_MACHINE\USER_winlite\Software\Microsoft\Windows\CurrentVersion\Privacy]
 "TailoredExperiencesWithDiagnosticDataEnabled"=dword:00000000
 [HKEY_LOCAL_MACHINE\USER_winlite\Software\Microsoft\Windows\CurrentVersion\AdvertisingInfo]
@@ -88,18 +140,52 @@ Windows Registry Editor Version 5.00
 [HKEY_LOCAL_MACHINE\USER_winlite\Software\Microsoft\Personalization\Settings]
 "AcceptedPrivacyPolicy"=dword:00000000
 
-; 시스템 권장 하드웨어 알림 비활성화
+; 진단 데이터 기반 맞춤형 환경 정책 비활성화
+[HKEY_LOCAL_MACHINE\USER_winlite\Software\Policies\Microsoft\Windows\CloudContent]
+"DisableTailoredExperiencesWithDiagnosticData"=dword:00000001
+
+; 피드백 요청 빈도 '안 함'
+[HKEY_LOCAL_MACHINE\USER_winlite\Software\Microsoft\Siuf\Rules]
+"NumberOfSIUFInPeriod"=dword:00000000
+"PeriodInNanoSeconds"=dword:00000000
+
+; 최소 사양 미충족 알림 비활성화
 [HKEY_LOCAL_MACHINE\USER_winlite\Control Panel\UnsupportedHardwareNotificationCache]
 "SV1"=dword:00000000
 "SV2"=dword:00000000
 
-; 딜레이 비활성화
+; 종료 시 응답 없는 프로그램 자동 종료
 [HKEY_LOCAL_MACHINE\USER_winlite\Control Panel\Desktop]
-"AutoEndTasks"=dword:00000001
+"AutoEndTasks"="1"
+
+; 메뉴 표시 딜레이 비활성화
+[HKEY_LOCAL_MACHINE\USER_winlite\Control Panel\Desktop]
 "MenuShowDelay"="0"
-[HKEY_LOCAL_MACHINE\USER_winlite\Software\Microsoft\Windows\CurrentVersion\Explorer]
+
+; 시작 프로그램 실행 딜레이 비활성화
+[HKEY_LOCAL_MACHINE\USER_winlite\Software\Microsoft\Windows\CurrentVersion\Explorer\Serialize]
 "StartupDelayInMSec"=dword:00000000
 "WaitForIdleState"=dword:00000000
 
 ; 프로그램별 볼륨 설정 저장 (https://sihloh4me.tistory.com/545)
 [HKEY_LOCAL_MACHINE\USER_winlite\Software\Microsoft\Internet Explorer\LowRegistry\Audio\PolicyConfig\PropertyStore]
+
+; 작업 표시줄 우클릭 메뉴에 작업 끝내기 추가
+[HKEY_LOCAL_MACHINE\USER_winlite\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarDeveloperSettings]
+"TaskbarEndTask"=dword:00000001
+
+; 바탕화면 '이 사진에 대해 알아보기' 아이콘 숨기기
+[HKEY_LOCAL_MACHINE\USER_winlite\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel]
+"{2cc5ca98-6485-489a-920e-b3e88a6ccce3}"=dword:00000001
+
+; Shift 5번 입력 시 고정 키 팝업 비활성화
+[HKEY_LOCAL_MACHINE\USER_winlite\Control Panel\Accessibility\StickyKeys]
+"Flags"="506"
+
+; 클래식 Outlook에서 New Outlook 자동 전환 비활성화
+[HKEY_LOCAL_MACHINE\USER_winlite\Software\Policies\Microsoft\office\16.0\outlook\preferences]
+"NewOutlookMigrationUserSetting"=dword:00000000
+
+; 클래식 우클릭 메뉴 활성화 (두 번째 로그인부터 적용)
+[HKEY_LOCAL_MACHINE\USER_winlite\Software\Microsoft\Windows\CurrentVersion\RunOnce]
+"ClassicContextMenu"="reg add \"HKCU\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32\" /ve /f"
