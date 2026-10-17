@@ -73,7 +73,9 @@ for %%A in (
     Microsoft.Getstarted
     Microsoft.HEIFImageExtension
     Microsoft.Microsoft3DViewer
+    Microsoft.MicrosoftJournal
     Microsoft.MicrosoftOfficeHub
+    Microsoft.MicrosoftPCManager
     Microsoft.MicrosoftSolitaireCollection
     Microsoft.MicrosoftStickyNotes
     Microsoft.MixedReality.Portal
@@ -117,6 +119,7 @@ for %%A in (
     MicrosoftCorporationII.MicrosoftFamily
     MicrosoftCorporationII.QuickAssist
     MicrosoftTeams
+    MicrosoftWindows.Client.WebExperience
     MSTeams
 ) do (
     for /f "tokens=3" %%C in ('findstr /i "%%A_" temp_apps.txt') do (
@@ -145,6 +148,10 @@ for %%D in (
     )
 )
 del "temp_system_packages.txt" >nul 2>&1
+dism /Image:MOUNT /Get-FeatureInfo /FeatureName:Recall >nul 2>&1 && (
+    echo 삭제 중: Recall
+    dism /Image:MOUNT /Disable-Feature /FeatureName:Recall /Remove >nul 2>&1
+)
 call :force_delete "MOUNT\inetpub"
 call :force_delete "MOUNT\PerfLogs"
 
