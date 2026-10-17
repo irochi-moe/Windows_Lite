@@ -2,6 +2,18 @@ Windows Registry Editor Version 5.00
 
 ; Windows Lite 11 Registry by Irochi (https://irochi.moe) for HKEY_LOCAL_MACHINE\SYSTEM
 
+; 검색 색인(Windows Search) 서비스 비활성화
+[HKEY_LOCAL_MACHINE\SYSTEM_winlite\ControlSet001\Services\WSearch]
+"Start"=dword:00000004
+
+; 원격 분석 서비스(DiagTrack) 비활성화
+[HKEY_LOCAL_MACHINE\SYSTEM_winlite\ControlSet001\Services\DiagTrack]
+"Start"=dword:00000004
+
+; Windows AI 서비스 자동 시작 비활성화
+[HKEY_LOCAL_MACHINE\SYSTEM_winlite\ControlSet001\Services\WSAIFabricSvc]
+"Start"=dword:00000003
+
 ; BitLocker 자동 장치 암호화 비활성화
 [HKEY_LOCAL_MACHINE\SYSTEM_winlite\ControlSet001\Control\BitLocker]
 "PreventDeviceEncryption"=dword:00000001
@@ -17,15 +29,3 @@ Windows Registry Editor Version 5.00
 ; 서비스 프로세스(svchost) 분리 비활성화
 [HKEY_LOCAL_MACHINE\SYSTEM_winlite\ControlSet001\Control]
 "SvcHostSplitThresholdInKB"=dword:10000000
-
-; 원격 분석 서비스(DiagTrack) 비활성화
-[HKEY_LOCAL_MACHINE\SYSTEM_winlite\ControlSet001\Services\DiagTrack]
-"Start"=dword:00000004
-
-; Windows AI 서비스 자동 시작 비활성화
-[HKEY_LOCAL_MACHINE\SYSTEM_winlite\ControlSet001\Services\WSAIFabricSvc]
-"Start"=dword:00000003
-
-; 검색 색인(Windows Search) 서비스 비활성화
-[HKEY_LOCAL_MACHINE\SYSTEM_winlite\ControlSet001\Services\WSearch]
-"Start"=dword:00000004
