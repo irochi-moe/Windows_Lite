@@ -3,7 +3,9 @@
 set "oscdimg=resources\oscdimg.exe"
 
 cd /d "%~dp0" || call :fail "네트워크 경로에서는 실행할 수 없습니다." "WinLite 폴더를 로컬 드라이브로 옮겨주세요."
-if not exist "install.wim" call :fail "install.wim을(를) 찾을 수 없습니다." "WinLite.bat을 먼저 실행해주세요."
+set "image=install.esd"
+if not exist "%image%" set "image=install.wim"
+if not exist "%image%" call :fail "install.wim/esd을(를) 찾을 수 없습니다." "WinLite.bat을 먼저 실행해주세요."
 if not exist "*.iso" call :fail "ISO 파일을 찾을 수 없습니다." "원본 ISO 파일을 WinLite 폴더에 넣어주세요."
 
 if not exist "%oscdimg%" (
@@ -47,7 +49,7 @@ for /f %%d in ('powershell -nop -c "(Mount-DiskImage -ImagePath '%cd%\%iso%' -Pa
 if "%drive%"=="" call :fail "ISO 마운트에 실패했습니다." "%iso% 파일이 손상되었을 수 있습니다."
 robocopy %drive%\ "ISO_TEMP" /e /a-:R /xf install.wim install.esd /njh /njs /ndl /nfl >nul
 powershell -nop -c "Dismount-DiskImage -ImagePath '%cd%\%iso%'" >nul
-mklink /h "ISO_TEMP\sources\install.wim" "install.wim" >nul || call :fail "install.wim 교체에 실패했습니다." "WinLite 폴더가 NTFS 드라이브에 있는지 확인해주세요."
+mklink /h "ISO_TEMP\sources\%image%" "%image%" >nul || call :fail "%image% 교체에 실패했습니다." "WinLite 폴더가 NTFS 드라이브에 있는지 확인해주세요."
 
 :make_iso
 call :banner "Creating ISO..." "" "" "     ISO를 만드는 중..."
