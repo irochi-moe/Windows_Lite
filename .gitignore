@@ -13,6 +13,8 @@
 *.zip
 /MOUNT
 /resources/wimlib
+/resources/oscdimg.exe
+/ISO_TEMP
 temp_apps.txt
 temp_system_packages.txt
 
