@@ -36,6 +36,7 @@ set "name=WinLite"
 set /p name=만들 ISO 파일 이름을 입력해주세요 (기본값: WinLite) :
 call :validate_name
 if not "%name_ok%"=="1" goto set_iso_name
+if /i "%name%.iso"=="%iso%" goto set_iso_name
 if exist "%name%.iso" (
     choice /c YN /m "%name%.iso 파일이 이미 있습니다. 덮어쓸까요"
     if errorlevel 2 goto set_iso_name
@@ -105,6 +106,6 @@ set "name_ok=1"
 set "probe=!name!#"
 set "stripped=!probe:"=!"
 if not "!stripped!"=="!probe!" set "name_ok=0"
-if "!name_ok!"=="1" for /f "tokens=1* delims=\/:*?<>|" %%a in ("#!name!#") do if not "%%b"=="" set "name_ok=0"
+if "!name_ok!"=="1" for /f "tokens=1* delims=\/:*?<>|&" %%a in ("#!name!#") do if not "%%b"=="" set "name_ok=0"
 endlocal & set "name_ok=%name_ok%"
 goto :eof

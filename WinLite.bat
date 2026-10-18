@@ -8,6 +8,7 @@ set "wimlib=resources\wimlib\wimlib-imagex.exe"
 cd /d "%~dp0" || call :fail "네트워크 경로에서는 실행할 수 없습니다." "WinLite 폴더를 로컬 드라이브로 옮겨주세요."
 whoami /groups | findstr /i "S-1-16-12288" >nul || call :fail "관리자 권한이 필요합니다." "WinLite.bat 파일을 우클릭해 관리자 권한으로 실행해주세요."
 if not exist "install.wim" call :fail "install.wim을(를) 찾을 수 없습니다." "순정 윈도우 이미지에서 파일을 가져와주세요."
+attrib -r install.wim >nul 2>&1
 
 set "windows_build="
 for /f "tokens=3 delims=." %%a in ('dism /Get-WimInfo /WimFile:install.wim /Index:1 ^| findstr /R /C:" 10\.0\.[0-9][0-9]*$"') do set "windows_build=%%a"
@@ -44,11 +45,12 @@ dism /Get-WimInfo /WimFile:install.wim
 set "index="
 set /p index=작업할 에디션의 인덱스 번호를 입력해주세요 :
 call :validate_index
-if "%index_ok%"=="1" goto mount
-goto main
+if not "%index_ok%"=="1" goto main
+dism /Get-WimInfo /WimFile:install.wim /Index:%index% >nul 2>&1 || goto main
 
 :mount
 call :banner "Mounting image..." "" "" "    이미지를 마운트하는 중..."
+for %%h in (USER SOFTWARE SYSTEM) do reg unload "HKLM\%%h_winlite" >nul 2>&1
 if exist "MOUNT" (
     echo 이전 마운트 정리 중...
     dism /Unmount-Wim /MountDir:MOUNT /Discard
@@ -191,9 +193,10 @@ set "descr="
 set /p descr=원하는 커스텀 에디션 설명을 입력해주세요:
 call :validate_text name
 if "%text_ok%"=="0" goto set_custom_edition
+if "%name%"=="" goto set_custom_edition
 call :validate_text descr
 if "%text_ok%"=="0" goto set_custom_edition
-"%wimlib%" info install.wim %index% "%name%" "%descr%" --image-property DISPLAYNAME="%name%" --image-property DISPLAYDESCRIPTION="%descr%"
+"%wimlib%" info install.wim %index% "%name%" "%descr%" --image-property DISPLAYNAME="%name%" --image-property DISPLAYDESCRIPTION="%descr%" || (pause & goto set_custom_edition)
 
 :finish
 color 1F
