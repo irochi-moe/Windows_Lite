@@ -158,7 +158,6 @@ dism /Image:MOUNT /Get-FeatureInfo /FeatureName:Recall >nul 2>&1 && (
     echo 삭제 중: Recall
     dism /Image:MOUNT /Disable-Feature /FeatureName:Recall /Remove >nul 2>&1
 )
-call :force_delete "MOUNT\inetpub"
 call :force_delete "MOUNT\PerfLogs"
 
 :modify_registry
