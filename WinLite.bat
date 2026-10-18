@@ -139,7 +139,6 @@ del "temp_apps.txt" >nul 2>&1
 call :banner "Removing system packages..." "" "" "  시스템 패키지를 삭제하는 중..."
 dism /Image:MOUNT /Get-Packages > temp_system_packages.txt
 for %%D in (
-    Microsoft-Windows-InternetExplorer-Optional-Package
     Microsoft-Windows-MediaPlayer-Package
     Microsoft-Windows-PowerShell-ISE-FOD-Package
     Microsoft-Windows-QuickAssist-Package
