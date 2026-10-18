@@ -57,6 +57,7 @@ call :banner "Creating ISO..." "" "" "     ISO를 만드는 중..."
 del /f /q "%name%.iso" 2>nul
 "%oscdimg%" -m -o -u2 -udfver102 -lWinLite -bootdata:2#p0,e,bISO_TEMP\boot\etfsboot.com#pEF,e,bISO_TEMP\efi\microsoft\boot\efisys.bin ISO_TEMP "%name%.iso" || call :fail "ISO 생성에 실패했습니다." "파일 이름이나 디스크 공간을 확인해주세요."
 rmdir /s /q "ISO_TEMP"
+if exist "%name%.iso" del /f /q "%image%"
 
 :finish
 color 1F
