@@ -49,6 +49,10 @@ if not "%index_ok%"=="1" goto main
 dism /Get-WimInfo /WimFile:install.wim /Index:%index% >nul 2>&1 || goto main
 
 :mount
+"%wimlib%" info install.wim --header | findstr /r /c:"^Version *= 0xe00" >nul && (
+    call :banner "Converting image..." "" "" "  solid 이미지를 일반 WIM으로 변환하는 중..."
+    "%wimlib%" optimize install.wim --compress=LZX || call :fail "이미지 변환에 실패했습니다." "디스크 공간이 부족한지 확인해주세요."
+)
 call :banner "Mounting image..." "" "" "    이미지를 마운트하는 중..."
 for %%h in (USER SOFTWARE SYSTEM) do reg unload "HKLM\%%h_winlite" >nul 2>&1
 if exist "MOUNT" (
