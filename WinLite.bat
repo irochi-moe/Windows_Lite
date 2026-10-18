@@ -170,8 +170,9 @@ copy "%res_dir%\%start_file%" "%start_dir%"
 
 :remove_onedrive
 call :banner "Removing OneDrive..." "" "" "    OneDrive를 삭제하는 중..."
-call :force_delete "MOUNT\Windows\System32\OneDriveSetup.exe"
-call :force_delete "MOUNT\Windows\SysWOW64\OneDriveSetup.exe"
+rem SFC가 WinSxS에서 복구하므로 삭제 안 함 (자동 설치는 winlite_USER.reg의 Run 키 삭제로 차단)
+rem call :force_delete "MOUNT\Windows\System32\OneDriveSetup.exe"
+rem call :force_delete "MOUNT\Windows\SysWOW64\OneDriveSetup.exe"
 call :force_delete "MOUNT\Users\Default\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\OneDrive.lnk"
 
 :unmount
