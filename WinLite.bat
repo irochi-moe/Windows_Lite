@@ -245,8 +245,8 @@ pause
 exit
 
 :import_hive
-reg load "HKLM\%~1_winlite" "%~2" || goto :eof
-reg import "%res_dir%\winlite_%~1.reg"
+reg load "HKLM\%~1_winlite" "%~2" || call :fail "%~1 레지스트리를 불러오지 못했습니다." "다른 프로그램이 하이브를 사용 중인지 확인해주세요."
+reg import "%res_dir%\winlite_%~1.reg" || (reg unload "HKLM\%~1_winlite" >nul 2>&1 & call :fail "%~1 레지스트리 적용에 실패했습니다." "reg 파일이 손상되지 않았는지 확인해주세요.")
 reg unload "HKLM\%~1_winlite"
 goto :eof
 
