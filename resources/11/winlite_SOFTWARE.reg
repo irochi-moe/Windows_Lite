@@ -33,6 +33,11 @@ Windows Registry Editor Version 5.00
 "workCompleted"=dword:00000001
 [-HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\CrossDeviceUpdate]
 
+; Teams 자동 설치 비활성화
+[HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Microsoft\Windows\CurrentVersion\WindowsUpdate\Orchestrator\UScheduler\TFLUpdate]
+"workCompleted"=dword:00000001
+[-HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\TFLUpdate]
+
 ; 작업 표시줄 Teams(Chat) 아이콘 자동 고정 비활성화
 [HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Policies\Microsoft\Windows\Windows Chat]
 "ChatIcon"=dword:00000003
