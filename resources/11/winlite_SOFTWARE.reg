@@ -62,6 +62,14 @@ Windows Registry Editor Version 5.00
 [HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Policies\Microsoft\Windows\Explorer]
 "DisableGraphRecentItems"=dword:00000001
 
+; 검색 웹 조회·결과 표시 제한  (Home, Pro 에디션 사용불가)
+[HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Policies\Microsoft\Windows\Windows Search]
+"ConnectedSearchUseWeb"=dword:00000000
+
+; OneDrive·SharePoint 클라우드 검색 비활성화
+[HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Policies\Microsoft\Windows\Windows Search]
+"AllowCloudSearch"=dword:00000000
+
 ; 검색 하이라이트 비활성화
 [HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Policies\Microsoft\Windows\Windows Search]
 "EnableDynamicContentInWSB"=dword:00000000
@@ -100,6 +108,15 @@ Windows Registry Editor Version 5.00
 "EnableActivityFeed"=dword:00000000
 "PublishUserActivities"=dword:00000000
 "UploadUserActivities"=dword:00000000
+
+; 기기 간 경험 비활성화
+[HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Policies\Microsoft\Windows\System]
+"EnableCdp"=dword:00000000
+
+; 클립보드 기록 및 기기 간 동기화 비활성화
+[HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Policies\Microsoft\Windows\System]
+"AllowClipboardHistory"=dword:00000000
+"AllowCrossDeviceClipboard"=dword:00000000
 
 ; 광고 ID 비활성화
 [HKEY_LOCAL_MACHINE\SOFTWARE_winlite\Policies\Microsoft\Windows\AdvertisingInfo]

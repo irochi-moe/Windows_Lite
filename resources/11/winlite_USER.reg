@@ -164,6 +164,11 @@ Windows Registry Editor Version 5.00
 "DisableAIDataAnalysis"=dword:00000001
 "DisableClickToDo"=dword:00000001
 
+; 휴대폰·PC 이어하기 비활성화
+[HKEY_LOCAL_MACHINE\USER_winlite\Software\Microsoft\Windows\CurrentVersion\CrossDeviceResume\Configuration]
+"IsResumeAllowed"=dword:00000000
+"IsPcToPhoneResumeAllowed"=dword:00000000
+
 ; Xbox 게임 녹화(Game DVR) 비활성화
 [HKEY_LOCAL_MACHINE\USER_winlite\Software\Microsoft\Windows\CurrentVersion\GameDVR]
 "AppCaptureEnabled"=dword:00000000
