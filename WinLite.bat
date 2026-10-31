@@ -38,7 +38,7 @@ choice /c YN /m "계속 진행하시겠습니까"
 if errorlevel 2 exit
 
 :main
-call :banner "" "" "" " by Irochi (https://irochi.moe)" "" "              v3.1" "" "  1. 자동 모드 (모든 에디션 작업)" "  2. 수동 모드 (에디션 하나 선택)"
+call :banner "" "" "" " by Irochi (https://irochi.moe)" "" "              v3.2" "" "  1. 자동 모드 (모든 에디션 작업)" "  2. 수동 모드 (에디션 하나 선택)"
 set "auto_mode=0"
 choice /c 12 /n /m "작업 모드를 선택해주세요 :"
 if errorlevel 2 goto select_index
