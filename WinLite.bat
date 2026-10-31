@@ -38,21 +38,36 @@ choice /c YN /m "계속 진행하시겠습니까"
 if errorlevel 2 exit
 
 :main
-call :banner "" "" "" " by Irochi (https://irochi.moe)" "" "              v3.1"
-pause
+call :banner "" "" "" " by Irochi (https://irochi.moe)" "" "              v3.1" "" "  1. 자동 모드 (모든 에디션 작업)" "  2. 수동 모드 (에디션 하나 선택)"
+set "auto_mode=0"
+choice /c 12 /n /m "작업 모드를 선택해주세요 :"
+if errorlevel 2 goto select_index
+set "auto_mode=1"
+set "first_index=1"
+set "last_index="
+for /f "tokens=1,* delims=:" %%a in ('"%wimlib%" info install.wim') do if "%%a"=="Image Count" set /a last_index=%%b
+if "%last_index%"=="" call :fail "install.wim 에디션 수를 확인할 수 없습니다." "순정 윈도우 이미지에서 파일을 가져와주세요."
+goto convert
+
+:select_index
 cls
 dism /Get-WimInfo /WimFile:install.wim
 set "index="
 set /p index=작업할 에디션의 인덱스 번호를 입력해주세요 :
 call :validate_index
-if not "%index_ok%"=="1" goto main
-dism /Get-WimInfo /WimFile:install.wim /Index:%index% >nul 2>&1 || goto main
+if not "%index_ok%"=="1" goto select_index
+dism /Get-WimInfo /WimFile:install.wim /Index:%index% >nul 2>&1 || goto select_index
+set "first_index=%index%"
+set "last_index=%index%"
 
-:mount
+:convert
 "%wimlib%" info install.wim --header | findstr /r /c:"^Version *= 0xe00" >nul && (
     call :banner "Converting image..." "" "" "  solid 이미지를 일반 WIM으로 변환하는 중..."
     "%wimlib%" optimize install.wim --compress=LZX || call :fail "이미지 변환에 실패했습니다." "디스크 공간이 부족한지 확인해주세요."
 )
+set "index=%first_index%"
+
+:mount
 call :banner "Mounting image..." "" "" "    이미지를 마운트하는 중..."
 for %%h in (USER SOFTWARE SYSTEM) do reg unload "HKLM\%%h_winlite" >nul 2>&1
 if exist "MOUNT" (
@@ -185,24 +200,35 @@ call :banner "Finishing..." "" "" "      작업을 완료하는 중..."
 dism /Image:MOUNT /Cleanup-Image /StartComponentCleanup /ResetBase
 dism /Unmount-Wim /MountDir:MOUNT /Commit || call :fail "이미지 언마운트에 실패했습니다." "디스크 공간이 부족하거나 파일이 사용 중일 수 있습니다."
 rmdir /s /q "MOUNT" >nul 2>&1
+set /a index+=1
+if %index% leq %last_index% goto mount
 
 :optimize
+if "%auto_mode%"=="1" goto run_optimize
 call :banner "Optimizing image..." "" "" "  이미지를 최적화할까요? (Y/N)"
 choice /c YN /m "최적화할까요"
-if not errorlevel 2 "%wimlib%" optimize install.wim --solid
+if errorlevel 2 goto set_custom_edition
+:run_optimize
+"%wimlib%" optimize install.wim --solid
 
 :set_custom_edition
+for /l %%i in (%first_index%,1,%last_index%) do call :read_image_info %%i
+
+:ask_custom_edition
 call :banner "Setting edition name..."
+echo   %%edition%% : 에디션 이름 (예: %edition%)
+echo   %%build%%   : 빌드 번호 (예: %build%)
+echo.
 set "name="
 set /p name=원하는 커스텀 에디션 이름을 입력해주세요:
 set "descr="
 set /p descr=원하는 커스텀 에디션 설명을 입력해주세요:
 call :validate_text name
-if "%text_ok%"=="0" goto set_custom_edition
-if "%name%"=="" goto set_custom_edition
+if "%text_ok%"=="0" goto ask_custom_edition
+if "%name%"=="" goto ask_custom_edition
 call :validate_text descr
-if "%text_ok%"=="0" goto set_custom_edition
-"%wimlib%" info install.wim %index% "%name%" "%descr%" --image-property DISPLAYNAME="%name%" --image-property DISPLAYDESCRIPTION="%descr%" || (pause & goto set_custom_edition)
+if "%text_ok%"=="0" goto ask_custom_edition
+for /l %%i in (%first_index%,1,%last_index%) do call :set_image_name %%i || (pause & goto ask_custom_edition)
 
 :finish
 color 1F
@@ -276,3 +302,29 @@ set "stripped=!probe:"=!"
 if not "!stripped!"=="!probe!" set "text_ok=0"
 endlocal & set "text_ok=%text_ok%"
 goto :eof
+
+:read_image_info
+set "edition="
+set "build="
+set "sp_build="
+for /f "tokens=1,* delims=:" %%a in ('"%wimlib%" info install.wim %1') do (
+    if "%%a"=="Name" for /f "tokens=2,*" %%c in ("%%b") do set "edition=%%d"
+    if "%%a"=="Build" for /f "tokens=*" %%c in ("%%b") do set "build=%%c"
+    if "%%a"=="Service Pack Build" for /f "tokens=*" %%c in ("%%b") do set "sp_build=%%c"
+)
+if defined sp_build set "build=%build%.%sp_build%"
+set "edition_%1=%edition%"
+set "build_%1=%build%"
+goto :eof
+
+:set_image_name
+setlocal EnableDelayedExpansion
+set "edition=!edition_%1!"
+set "build=!build_%1!"
+set "n=!name:%%edition%%=%edition%!"
+set "n=!n:%%build%%=%build%!"
+set "d=!descr!"
+if defined d set "d=!d:%%edition%%=%edition%!"
+if defined d set "d=!d:%%build%%=%build%!"
+"%wimlib%" info install.wim %1 "!n!" "!d!" --image-property DISPLAYNAME="!n!" --image-property DISPLAYDESCRIPTION="!d!"
+endlocal & exit /b %errorlevel%
